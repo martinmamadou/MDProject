@@ -1,0 +1,85 @@
+.admin-container {
+  padding: 1rem;
+  max-width: 100%;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #2196F3;
+  }
+}
+
+.admin-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #444;
+  }
+}
+
+.admin-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.stats-box {
+  padding: 1rem;
+  border-radius: 6px;
+  background: #f5f5f5;
+  
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2196F3;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+    color: #666;
+  }
+}
+
+.action-button {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 4px;
+  background: #2196F3;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #1976D2;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 0.5rem;
+  }
+
+  .admin-card {
+    padding: 0.8rem;
+  }
+
+  .action-button {
+    padding: 1rem;  // Plus grand sur mobile pour meilleur touch target
+  }
+}

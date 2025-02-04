@@ -1,0 +1,24 @@
+<div class="userlist-container">
+    <h1>Gestion des utilisateurs</h1>
+  
+    <div class="user-list">
+      <div class="user-card" *ngFor="let user of users">
+        <div class="user-header">
+          <div class="user-avatar">
+            {{ user.username.charAt(0).toUpperCase() }}
+          </div>
+          <div class="user-info">
+            <div class="user-email">{{user.email}}</div>
+            <div class="user-role">{{ user.role }}</div>
+          </div>
+        </div>
+        <div class="user-actions">
+          <button class="delete" (click)= "deleteUser(user.id_user)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  
+    <button class="add-user-fab" aria-label="Ajouter un utilisateur">+</button>
+  </div>
+  
+  

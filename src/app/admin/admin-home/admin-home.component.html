@@ -1,0 +1,17 @@
+<div class="admin-container">
+  <h1>Administration</h1>
+
+  <div class="admin-grid">
+    <!-- Carte des utilisateurs -->
+    <div class="admin-card">
+      <h2><i class="fas fa-users"></i> Gestion Utilisateurs</h2>
+      <div class="stats-box">
+        <div class="stat-value">{{users.length || 0}}</div>
+        <div class="stat-label">Utilisateurs inscrits</div>
+      </div>
+      <button class="action-button" routerLink="/admin/users">
+        Gérer les utilisateurs
+      </button>
+    </div>
+  </div>
+</div>
