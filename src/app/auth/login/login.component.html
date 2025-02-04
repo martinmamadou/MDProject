@@ -1,0 +1,13 @@
+<h1 class="title text-center my-20">Connexion</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="Login()">
+    <div class="input-group">
+        <label>email : </label>
+        <input type="email" formControlName="email">
+    </div>
+    <div class="input-group">
+        <label>password : </label>
+        <input type="password" formControlName="password">
+    </div>
+    <button type="submit">Connexion</button>
+</form>

@@ -1,0 +1,16 @@
+<h1 class="title text-center">Inscription</h1>
+<form [formGroup]="registerForm" (ngSubmit)="Register()" class="form-center">
+  <div class="input-group">
+    <label>Pseudonyme</label>
+    <input type="text" formControlName="username" class="input-style">
+  </div>
+  <div class="input-group">
+    <label>Email</label>
+    <input type="email" formControlName="email" class="input-style">
+  </div>
+  <div class="input-group">
+    <label>Password</label>
+    <input type="password" formControlName="password" class="input-style">
+  </div>
+  <button type="submit" class="btn-primary">Register</button>
+</form>

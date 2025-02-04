@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: none;
+}
+
+body{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-primary{
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  &:hover{
+    background-color: #34495e;
+    color: #3498db;
+  }
+}
+
+.my-20{
+  margin: 20px 0;
+}
