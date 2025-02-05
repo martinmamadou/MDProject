@@ -9,8 +9,18 @@
         <div class="stat-value">{{users.length || 0}}</div>
         <div class="stat-label">Utilisateurs inscrits</div>
       </div>
-      <button class="action-button" routerLink="/admin/users">
+      <button class="action-button" routerLink="/admin/userlist">
         Gérer les utilisateurs
+      </button>
+    </div>
+    <div class="admin-card">
+      <h2><i class="fas fa-users"></i> Gestion des types</h2>
+      <div class="stats-box">
+        <div class="stat-value">{{types.length || 0}}</div>
+        <div class="stat-label">Nombres de Types</div>
+      </div>
+      <button class="action-button" routerLink="/admin/typelist">
+        Gérer les types
       </button>
     </div>
   </div>

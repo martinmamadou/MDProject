@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { UserEntity } from '../../../core/entity/user.entity';
 import { UserServiceService } from '../../../core/services/user-service.service';
 import { DataService } from '../../data.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-users',
-  imports: [RouterOutlet],
+  imports: [NgFor],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })

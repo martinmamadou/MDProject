@@ -9,6 +9,7 @@ import { UsersComponent } from './admin/users/users.component';
 import { adminGuard } from './guards/admin.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { TypeFumeursComponent } from './admin/type-fumeurs/type-fumeurs.component';
 
 
 export const routes: Routes = [
@@ -24,7 +25,8 @@ export const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [adminGuard], 
     children :  [
       { path: '', component: AdminHomeComponent },
-      { path: 'userlist', component: UsersComponent }
+      { path: 'userlist', component: UsersComponent },
+      { path: 'typelist', component: TypeFumeursComponent}
     ]},
 
 ];
