@@ -1,8 +1,22 @@
+<!-- Ajout du CDN Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <nav>
   <ul>
-    <li><a routerLink="/">Accueil</a></li>
-    <li><a routerLink="/auth/register">Inscription</a></li>
-    <li><a routerLink="/admin">admin</a></li>
-    <li><a href="#" (click)="logout()">Déconnexion</a></li>
+    <span>
+      <li><a routerLink="/"><i class="fas fa-home"></i> Accueil</a></li>
+    </span>
+    <span>
+      <li><a><i class="fas fa-trophy"></i> Défis</a></li>
+    </span>
+    <span>
+      <li><a><i class="fas fa-chart-line"></i> Stats</a></li>
+    </span>
+    <span>
+      <li><a><i class="fas fa-gift"></i> Gains</a></li>
+    </span>
+    <span>
+      <li><a><i class="fas fa-user"></i> Profil</a></li>
+    </span>
   </ul>
 </nav>

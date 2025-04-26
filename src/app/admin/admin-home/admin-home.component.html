@@ -14,14 +14,23 @@
       </button>
     </div>
     <div class="admin-card">
-      <h2><i class="fas fa-users"></i> Gestion des types</h2>
+      <h2><i class="fas fa-trophy"></i> Gestion des challenges</h2>
       <div class="stats-box">
         <div class="stat-value">{{types.length || 0}}</div>
-        <div class="stat-label">Nombres de Types</div>
+        <div class="stat-label">Nombres de Challenges</div>
       </div>
-      <button class="action-button" routerLink="/admin/typelist">
-        Gérer les types
+      <button class="action-button" routerLink="/admin/challenges">
+        Gérer les challenges
       </button>
     </div>
+    <div class="admin-card">
+      <h2><i class="fas fa-chart-line"></i> Gestion des statistiques</h2>
+      <div class="stats-box">
+        <!-- <div class="stat-value">{{stats.length || 0}}</div> -->
+        <div class="stat-label">Nombres de statistiques</div>
+      </div>
+      <button class="action-button" routerLink="">
+        Gérer les statistiques
+      </button>
   </div>
 </div>
