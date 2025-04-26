@@ -9,7 +9,9 @@ import { UsersComponent } from './admin/users/users.component';
 import { adminGuard } from './guards/admin.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
-import { TypeFumeursComponent } from './admin/type-fumeurs/type-fumeurs.component';
+import { ChallengesComponent } from './admin/challenges/challenges.component';
+import { ChallengesFormComponent } from './admin/challenges/challenges-form/challenges-form.component';
+
 
 
 export const routes: Routes = [
@@ -26,7 +28,13 @@ export const routes: Routes = [
     children :  [
       { path: '', component: AdminHomeComponent },
       { path: 'userlist', component: UsersComponent },
-      { path: 'typelist', component: TypeFumeursComponent}
+      { path: 'challenges', component: ChallengesComponent,
+        children: [
+          { path: 'create', component: ChallengesFormComponent },
+          { path: 'edit/:id', component: ChallengesFormComponent }
+        ]
+      }
+      
     ]},
 
 ];

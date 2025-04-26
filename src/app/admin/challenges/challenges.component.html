@@ -1,0 +1,49 @@
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>Gestion des challenges</h1>
+    <button class="admin-button" routerLink="/admin/challenges/create">
+      <i class="fas fa-plus"></i>
+      Ajouter un challenge
+    </button>
+  </div>
+
+  <router-outlet></router-outlet>
+
+  <div class="admin-grid">
+    <div class="admin-card" *ngFor="let challenge of challenges">
+      <div class="challenge-header">
+        <h2>{{ challenge.name }}</h2>
+        <span class="admin-status" [class.active]="challenge.is_active" [class.inactive]="!challenge.is_active">
+          {{ challenge.is_active ? 'Actif' : 'Inactif' }}
+        </span>
+      </div>
+      
+      <div class="challenge-content">
+        <div class="admin-info-group">
+          <span class="label">Description:</span>
+          <span class="value">{{ challenge.description }}</span>
+        </div>
+        <div class="admin-info-group">
+          <span class="label">Points:</span>
+          <span class="value">{{ challenge.points }}</span>
+        </div>
+        <div class="admin-info-group">
+          <span class="label">Difficulté:</span>
+          <span class="value">{{ challenge.difficulty }}</span>
+        </div>
+      </div>
+
+      <div class="challenge-actions">
+        <button class="admin-button edits" routerLink="/admin/challenges/edit/{{ challenge.id }}">
+          <i class="fas fa-edit"></i>
+          Modifier
+        </button>
+        <button class="admin-button delete" routerLink="/admin/challenges/delete/{{ challenge.id }}">
+          <i class="fas fa-trash"></i>
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

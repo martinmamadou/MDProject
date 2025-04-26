@@ -1,0 +1,50 @@
+<div class="form-container">
+  <h1>{{ isEditMode ? 'Modifier' : 'Ajouter' }} un challenge</h1>
+  
+  <form [formGroup]="challengeForm" (ngSubmit)="onSubmit()" class="challenge-form">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" formControlName="name" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="difficulty">Difficulté</label>
+      <select id="difficulty" formControlName="difficulty" class="form-control">
+        <option value="easy">Facile</option>
+        <option value="medium">Moyen</option>
+        <option value="hard">Difficile</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="points">Points</label>
+      <input type="number" id="points" formControlName="points" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="badges">Badge</label>
+      <input type="text" id="badges" formControlName="badges" class="form-control">
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label for="is_active">
+        <input type="checkbox" id="is_active" formControlName="is_active">
+        Actif
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/admin/challenges'])">
+        Annuler
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="!challengeForm.valid">
+        {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+      </button>
+    </div>
+  </form>
+</div>
