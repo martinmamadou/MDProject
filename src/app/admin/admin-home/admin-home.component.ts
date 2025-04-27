@@ -5,6 +5,8 @@ import { RouterLink } from '@angular/router';
 import { UserServiceService } from '../../../core/services/user-service.service';
 import { FumeurTypeEntity } from '../../../core/entity/fumeur-type.entity';
 import { FumeurTypeService } from '../../../core/services/fumeur-type.service';
+import { StatsService } from '../../../core/services/stats.service';
+import { StatsEntity } from '../../../core/entity/stats.entity';
 
 @Component({
   selector: 'app-admin-home',
@@ -15,12 +17,14 @@ import { FumeurTypeService } from '../../../core/services/fumeur-type.service';
 export class AdminHomeComponent implements OnInit {
   users: UserEntity[] = []
   types: FumeurTypeEntity[]= []
+  stats: StatsEntity[]= []
 
-  constructor(private dataService: DataService, private fumeurTypeService: FumeurTypeService) {}
+  constructor(private dataService: DataService, private fumeurTypeService: FumeurTypeService, private statsService: StatsService) {}
 
   ngOnInit() {
    this.dataService.getData().subscribe(users => this.users = users);
    this.fumeurTypeService.getType().subscribe(types=>this.types=types)
+   this.statsService.getAllStats().subscribe(stats=>this.stats=stats)
   }
 
 }

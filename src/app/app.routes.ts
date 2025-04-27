@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { ChallengesComponent } from './admin/challenges/challenges.component';
 import { ChallengesFormComponent } from './admin/challenges/challenges-form/challenges-form.component';
+import { StatsComponent } from './admin/stats/stats.component';
 
 
 
@@ -33,8 +34,10 @@ export const routes: Routes = [
           { path: 'create', component: ChallengesFormComponent },
           { path: 'edit/:id', component: ChallengesFormComponent }
         ]
-      }
-      
+      },
+      { path: 'stats', component: StatsComponent, children: [
+        
+      ] }
     ]},
 
 ];
