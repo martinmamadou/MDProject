@@ -14,5 +14,9 @@ export class UserServiceService {
   deleteUser(id:number): Observable<UserEntity>{
     return this.http.delete<UserEntity>(`${this.apiUrl}/${id}/delete`)
   }
+
+  getUserConnected(): Observable<UserEntity>{
+    return this.http.get<UserEntity>(`${this.apiUrl}/connected`)
+  }
 }
 

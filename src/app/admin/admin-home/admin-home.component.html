@@ -33,4 +33,24 @@
         Gérer les statistiques
       </button>
   </div>
+    <div class="admin-card">
+      <h2><i class="fas fa-award"></i> Gestion des recompenses</h2>
+      <div class="stats-box">
+        <div class="stat-value">{{rewards.length || 0}}</div>
+        <div class="stat-label">Nombres de recompenses</div>
+      </div>
+      <button class="action-button" routerLink="/admin/rewards">
+        Gérer les recompenses
+      </button>
+  </div>
+    <div class="admin-card">
+      <h2><i class="fas fa-exclamation-triangle"></i> Gestion des urgences</h2>
+      <div class="stats-box">
+        <div class="stat-value">{{emergencies.length || 0}}</div>
+        <div class="stat-label">Nombres d'urgences</div>
+      </div>
+      <button class="action-button" routerLink="/admin/emergency">
+        Gérer les urgences
+      </button>
+  </div>
 </div>

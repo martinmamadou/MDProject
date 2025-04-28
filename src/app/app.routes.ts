@@ -12,6 +12,10 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { ChallengesComponent } from './admin/challenges/challenges.component';
 import { ChallengesFormComponent } from './admin/challenges/challenges-form/challenges-form.component';
 import { StatsComponent } from './admin/stats/stats.component';
+import { RewardsComponent } from './admin/rewards/rewards.component';
+import { RewardsFormComponent } from './admin/rewards/rewards-form/rewards-form.component';
+import { EmergencyComponent } from './admin/emergency/emergency.component';
+import { EmergencyFormComponent } from './admin/emergency/emergency-form/emergency-form.component';
 
 
 
@@ -37,7 +41,17 @@ export const routes: Routes = [
       },
       { path: 'stats', component: StatsComponent, children: [
         
+      ] },
+      { path: 'rewards', component: RewardsComponent, children: [
+        { path: 'create', component: RewardsFormComponent },
+        { path: 'edit/:id', component: RewardsFormComponent }
+      ] },
+      
+      { path: 'emergency', component: EmergencyComponent, children: [
+        { path: 'create', component: EmergencyFormComponent },
+        { path: 'edit/:id', component: EmergencyFormComponent }
       ] }
+
     ]},
 
 ];

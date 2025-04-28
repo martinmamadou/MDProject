@@ -1,0 +1,38 @@
+<div class="form-container">
+  <h1>{{ isEditMode ? 'Modifier' : 'Ajouter' }} une urgence</h1>
+  
+  <form [formGroup]="emergencyForm" (ngSubmit)="onSubmit()" class="emergency-form">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" formControlName="name" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="tips">Conseils</label>
+      <textarea id="tips" formControlName="tips" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Catégorie</label>
+      <select id="category" formControlName="category" class="form-control">
+        <option value="physical">Physique</option>
+        <option value="mental">Mental</option>
+        <option value="social">Social</option>
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/admin/emergency'])">
+        Annuler
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="!emergencyForm.valid">
+        {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+      </button>
+    </div>
+  </form>
+</div>

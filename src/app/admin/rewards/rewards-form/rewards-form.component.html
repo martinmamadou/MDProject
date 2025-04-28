@@ -1,0 +1,36 @@
+<div class="form-container">
+  <h1>{{ isEditMode ? 'Modifier' : 'Ajouter' }} une récompense</h1>
+  
+  <form [formGroup]="rewardForm" (ngSubmit)="onSubmit()" class="reward-form">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" formControlName="name" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="points">Points nécessaires</label>
+      <input type="number" id="points" formControlName="points_needed" class="form-control">
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label for="is_active">
+        <input type="checkbox" id="is_active" formControlName="is_active">
+        Actif
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/admin/rewards'])">
+        Annuler
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="!rewardForm.valid">
+        {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+      </button>
+    </div>
+  </form>
+</div>

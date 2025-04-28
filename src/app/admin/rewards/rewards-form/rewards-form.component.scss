@@ -1,0 +1,145 @@
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+
+  h1 {
+    color: #333;
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+}
+
+.reward-form {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+  }
+
+  &.checkbox-group {
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #2196f3;
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: #f44336;
+  }
+}
+
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+
+  button {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: darken(#2196f3, 10%);
+  }
+}
+
+.btn-secondary {
+  background-color: #f5f5f5;
+  color: #333;
+
+  &:hover {
+    background-color: darken(#f5f5f5, 5%);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+  .form-container {
+    padding: 16px;
+  }
+
+  .reward-form {
+    padding: 16px;
+  }
+
+  .form-control {
+    padding: 16px;
+    font-size: 16px; // Prevents zoom on iOS
+  }
+
+  .form-actions {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+      padding: 16px;
+    }
+  }
+}
