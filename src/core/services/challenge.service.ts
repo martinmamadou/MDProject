@@ -26,4 +26,8 @@ export class ChallengeService {
   getChallengeById(id: number): Observable<ChallengeEntity> {
     return this.http.get<ChallengeEntity>(`${this.apiUrl}/${id}`);
   }
+
+  getChallengeByTarget(target: string): Observable<ChallengeEntity[]> {
+    return this.http.get<ChallengeEntity[]>(`${this.apiUrl}/target/${target}`);
+  }
 }

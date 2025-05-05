@@ -16,6 +16,8 @@ import { RewardsComponent } from './admin/rewards/rewards.component';
 import { RewardsFormComponent } from './admin/rewards/rewards-form/rewards-form.component';
 import { EmergencyComponent } from './admin/emergency/emergency.component';
 import { EmergencyFormComponent } from './admin/emergency/emergency-form/emergency-form.component';
+import { ProfileComponent } from './public/profile/profile.component';
+import { PChallengesComponent } from './public/p-challenges/p-challenges.component';
 
 
 
@@ -52,6 +54,12 @@ export const routes: Routes = [
         { path: 'edit/:id', component: EmergencyFormComponent }
       ] }
 
-    ]},
-
+    ]
+  },
+    {
+      path :'profile', component: ProfileComponent 
+    },
+    {
+      path :'challenges', component: PChallengesComponent
+    }
 ];

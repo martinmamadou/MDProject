@@ -1,10 +1,12 @@
 import { StatsEntity } from './stats.entity';
 
 export class UserEntity {
-  id_user!: number;
+  id!: number;
   username!: string;
   email!: string;
   role!: string;
+  smoker_type!: string;
+  user_type!: string;
   password!: string;
   created_at!: Date;
   login_date!: Date;

@@ -19,5 +19,7 @@ export class StatsService {
     return this.http.get<StatsEntity[]>(`${this.apiUrl}/all`);
   }
 
-
+  getStatsByUserId(userId: number): Observable<StatsEntity> {
+    return this.http.get<StatsEntity>(`${this.apiUrl}/${userId}`);
+  }
 }

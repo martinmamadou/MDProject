@@ -13,11 +13,11 @@
     </div>
 
     <div class="form-group">
-      <label for="difficulty">Difficulté</label>
-      <select id="difficulty" formControlName="difficulty" class="form-control">
-        <option value="easy">Facile</option>
-        <option value="medium">Moyen</option>
-        <option value="hard">Difficile</option>
+      <label for="difficulty">cible</label>
+      <select id="difficulty" formControlName="target" class="form-control">
+        <option value="casual">Casuel</option>
+        <option value="regular">Régulier</option>
+        <option value="addicted">Addicte</option>
       </select>
     </div>
 
@@ -36,6 +36,11 @@
         <input type="checkbox" id="is_active" formControlName="is_active">
         Actif
       </label>
+    </div>
+
+    <div class="form-group">
+      <label for="estimated_duration">Durée estimée</label>
+      <input type="number" id="estimated_duration" formControlName="estimated_duration" class="form-control">
     </div>
 
     <div class="form-actions">

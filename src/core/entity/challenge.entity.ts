@@ -6,4 +6,6 @@ export class ChallengeEntity {
     points!: number;
     badges!: string;
     is_active!: boolean;
+    target!: string;
+    estimated_duration!: number;
 }

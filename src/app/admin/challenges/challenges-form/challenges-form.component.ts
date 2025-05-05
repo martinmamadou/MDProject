@@ -26,10 +26,11 @@ export class ChallengesFormComponent implements OnInit {
     this.challengeForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      difficulty: ['', Validators.required],
+      target: ['', Validators.required],
       points: ['', [Validators.required, Validators.min(0)]],
       badges: ['', Validators.required],
-      is_active: [false]
+      is_active: [false],
+      estimated_duration: ['', [Validators.required, Validators.min(0)]]
     });
   }
 
