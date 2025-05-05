@@ -1,0 +1,10 @@
+<section class="defis-container">
+    <h1>Défis</h1>
+    <div class="defis-list" *ngFor="let challenge of challenges">
+      <div class="defis-item">
+        <h2>{{challenge.name}}</h2>
+        <p>{{challenge.description}}</p>
+        <button>Voir le défi</button>
+      </div>
+    </div>
+</section>
