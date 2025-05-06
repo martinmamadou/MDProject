@@ -1,0 +1,68 @@
+.sign-in-container{
+  padding-top: 40px;
+  text-align: center;
+  .content-wrapper{
+    .back-button{
+      position: absolute;
+      top: 50px;
+      left: 10px;
+    }
+  }
+
+  .social-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-direction: column;
+    margin: 0 0 40px 0;
+    .facebook-button{
+      background-color: #3b5998;
+      color: white;
+      text-transform: uppercase;
+    }
+    .google-button{
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid #dadada;
+      color: black;
+    }
+    
+  }
+  .email-text{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 auto 10px ;
+    width: 60%;
+    color: #A1A4B2;
+    margin-bottom: 20px;
+  }
+  .input-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    .input-card{
+      width: 100%;
+      font-size: 1.2rem;
+    }
+  }
+  .account-text-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    .forgot-password{
+      font-size: 1.2rem;
+      color: black;
+    }
+    .account-text{
+      font-size: 1.2rem;
+      color: #A1A4B2;
+    }
+  }
+  
+
+}

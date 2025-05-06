@@ -1,13 +1,47 @@
-<h1 class="title text-center my-20">Connexion</h1>
+<section class="sign-in-container">
+    <div class="content-wrapper">
+      <button class="back-button">
+        <img alt="Back" src="assets/vector.svg" />
+      </button>
+  
+      <img class="logo" alt="Logo page accueil" src="assets/img/Logo.png" width="150px" height="150px" />
+      
+      <div class="social-buttons">
+        <button class="facebook-button btn">
+          <img alt="Vector" src="assets/vector-1.svg" />
+          <span>CONTINUER AVEC FACEBOOK</span>
+        </button>
+  
+        <button class="google-button btn">
+          <img alt="Google" src="assets/group-6795.png" />
+          <span>CONTINUER AVEC GOOGLE</span>
+        </button>
+      </div>
+  
+      <div class="email-text">Se connecter avec une adresse mail</div>
+      <div class="input-container">
+        <div class="input-card email">
+          <input placeholder="Adresse mail" type="text" />
+        </div>
+  
+      <div class="input-card password">
+        <input placeholder="Mots de passe" type="password" />
+      </div>
+      </div>
+  
+      <button class="sign-in-button btn btn-primary">
+        <span>Se connecter</span>
+      </button>
+      
 
-<form [formGroup]="loginForm" (ngSubmit)="Login()">
-    <div class="input-group">
-        <label>email : </label>
-        <input type="email" formControlName="email">
+      <div class="account-text-container">
+      <p class="forgot-password">Mot de passe oublié ?</p>
+  
+      
+        <p class="account-text">
+          Tu as déjà un compte ? <span class="login-link">Connecte-toi</span>
+        </p>
     </div>
-    <div class="input-group">
-        <label>password : </label>
-        <input type="password" formControlName="password">
-    </div>
-    <button type="submit">Connexion</button>
-</form>
+  </div>
+
+</section>

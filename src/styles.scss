@@ -4,37 +4,49 @@
   padding: 0;
 }
 
-input{
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: none;
-}
-
 body{
-  background: whitesmoke;
+  background: rgb(249, 249, 249);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.btn-primary{
-  background-color: #2c3e50;
-  color: white;
+.logo{
+  object-fit: contain;
+}
+
+input{
   border: none;
-  padding: 10px 30px;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-top: 10px;
-  &:hover{
-    background-color: #34495e;
-    color: #3498db;
-  }
+  border-radius: 15px;
+  height: 63px;
+  padding: 0 20px;
+  width: 90%;
+  background-color: #F2F3F7;
+}
+
+.btn{
+  border: none;
+  border-radius: 38px;
+  height: 63px;
+  width: 90%;
+}
+
+.btn-primary{
+  background-color: #B000EB;
+  color: white;
 }
 
 .my-20{
   margin: 20px 0;
+}
+
+.logo-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 20px 0;
+  img{
+    object-fit: contain;
+  }
 }
