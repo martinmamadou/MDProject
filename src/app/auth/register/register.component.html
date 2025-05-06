@@ -1,16 +1,48 @@
-<h1 class="title text-center">Inscription</h1>
+<section class="sign-up-container">
+  <div class="content-wrapper">
+    <button class="back-button">
+      <img alt="Back" src="assets/vector.svg" />
+    </button>
+  </div>
+
+  <h1 class="title text-center">Créer votre compte</h1>
+
+  <div class="social-buttons">
+    <button class="facebook-button btn">
+      <img alt="Vector" src="assets/vector-1.svg" />
+      <span>CONTINUER AVEC FACEBOOK</span>
+    </button>
+
+    <button class="google-button btn">
+      <img alt="Google" src="assets/group-6795.png" />
+      <span>CONTINUER AVEC GOOGLE</span>
+    </button>
+  </div>
+
+  <div class="email-text">Se connecter avec une adresse mail</div>
+
 <form [formGroup]="registerForm" (ngSubmit)="Register()" class="form-center">
-  <div class="input-group">
-    <label>Pseudonyme</label>
-    <input type="text" formControlName="username" class="input-style">
+  <div class="input-container">
+    <div class="input-card">
+      <label>Pseudonyme</label>
+      <input type="text" formControlName="username" class="input-style" placeholder="Pseudonyme">
   </div>
-  <div class="input-group">
+  <div class="input-card">
     <label>Email</label>
-    <input type="email" formControlName="email" class="input-style">
+    <input type="email" formControlName="email" class="input-style" placeholder="Email">
+    </div>
+    <div class="input-card">
+      <label>Password</label>
+      <input type="password" formControlName="password" class="input-style" placeholder="Mot de passe">
+    </div>
   </div>
-  <div class="input-group">
-    <label>Password</label>
-    <input type="password" formControlName="password" class="input-style">
+  <div class="checkbox-container">
+    <input type="checkbox" name="checkbox" id="checkbox">
+    <label class="checkbox-label" for="checkbox">J'ai lu et j'accepte les politiques...</label>
   </div>
-  <button type="submit" class="btn-primary">Register</button>
+  <button type="submit" class="btn-primary btn">S'inscrire</button>
 </form>
+<div class="text-center connect-text">
+  <p>Déjà un compte ? <span routerLink="/auth/login">Connecte-toi</span></p>
+</div>
+</section>

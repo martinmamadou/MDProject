@@ -1,10 +1,21 @@
-<div class="auth-container">
+<section class="auth-container">
   <div class="logo-container">
     <svg width="414" height="502" viewBox="0 0 414 502" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0 -1V381.053C0 381.053 32.2351 449.788 115.112 441.811C197.989 433.835 215.177 390.876 315.243 470.049C315.243 470.049 350.543 503.185 415 501.967V-1H0Z" fill="#A594F9"/>
       </svg>
         <div class="logo-img">
-          <img src="assets/img/Logo.png" alt="logo" width="100px" height="100px"/>
+          <img src="assets/img/Logo.png" alt="logo" width="200px" height="200px"/>
         </div>
   </div>
-</div>
+  <svg class="underline" width="414" height="71" viewBox="0 0 414 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M402.149 71C349.355 71 318.072 46.6618 317.738 46.3815C255.185 -2.76224 216.838 6.60991 163.778 19.6001C149.705 23.0445 135.138 26.6092 118.529 29.5997C37.3493 44.232 -2.59944 1.67016 -3 1.22959L-2.01196 0.335083C-1.62476 0.762303 37.8967 42.7768 118.275 28.2913C134.858 25.3008 149.385 21.7495 163.444 18.3051C216.878 5.2348 255.478 -4.2041 318.553 45.3401C318.94 45.6472 356.899 75.152 419.853 68.7571L419.987 70.0788C413.805 70.7197 407.85 71 402.149 71Z" fill="#A594F9"/>
+    </svg>  
+    <div class="landing-text text-center">
+      <h1>Reprends le contrôle</h1>
+      <p>Des milliers de gens écrasent leur dernière clope avec StopSmoke. Et toi, t’es prêt(e) ?</p>
+      <button class="btn btn-primary" routerLink="/auth/register">
+        <span>S'inscrire</span>
+      </button>
+      <p>Déjà un compte ? <span routerLink="/auth/login">Connecte-toi</span></p>
+    </div>  
+</section>

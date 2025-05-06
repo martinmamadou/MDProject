@@ -1,16 +1,22 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-navigation',
-  imports: [RouterLink],
+  imports: [RouterLink, NgIf],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent {
   authService = inject(AuthServiceService)
   router = inject(Router)
+
+  shouldShowNav(): boolean {
+    const currentRoute = this.router.url;
+    return !['/auth/login', '/auth/register', '/auth'].includes(currentRoute);
+  }
 
   logout() {
     this.authService.logout()
@@ -25,5 +31,4 @@ export class NavigationComponent {
       error: (err) => console.error('Erreur:', err)
     });
   }
-
 }

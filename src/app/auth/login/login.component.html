@@ -19,19 +19,21 @@
       </div>
   
       <div class="email-text">Se connecter avec une adresse mail</div>
+      <form [formGroup]="loginForm" (ngSubmit)="Login()">
       <div class="input-container">
         <div class="input-card email">
-          <input placeholder="Adresse mail" type="text" />
+          <input placeholder="Adresse mail" type="text" formControlName="email" />
         </div>
   
       <div class="input-card password">
-        <input placeholder="Mots de passe" type="password" />
+        <input placeholder="Mots de passe" type="password" formControlName="password" />
       </div>
       </div>
   
-      <button class="sign-in-button btn btn-primary">
+      <button type="submit" class="sign-in-button btn btn-primary">
         <span>Se connecter</span>
       </button>
+    </form>
       
 
       <div class="account-text-container">

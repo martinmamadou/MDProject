@@ -4,6 +4,30 @@
   padding: 0;
 }
 
+$text-color: #A1A4B2;
+$text-color-dark: #3F414E;
+$text-family: 'Poppins', sans-serif;
+$text-size: 1.2rem;
+$title-family: 'Owners', sans-serif;
+
+.text-center{
+  text-align: center;
+}
+
+
+
+p{
+  font-family: $text-family;
+  color: $text-color;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: $title-family;
+  font-weight: 800;
+  color: $text-color-dark;
+}
+
+
 body{
   background: rgb(249, 249, 249);
   box-sizing: border-box;
@@ -13,6 +37,10 @@ body{
 
 .logo{
   object-fit: contain;
+}
+
+label{
+  display: none;
 }
 
 input{
@@ -37,7 +65,7 @@ input{
 }
 
 .my-20{
-  margin: 20px 0;
+  margin: 40px 0 ;
 }
 
 .logo-container{
@@ -48,5 +76,36 @@ input{
   padding: 20px 0;
   img{
     object-fit: contain;
+  }
+}
+
+.social-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-direction: column;
+  margin: 0 0 40px 0;
+  .facebook-button{
+    background-color: #3b5998;
+    color: white;
+    text-transform: uppercase;
+  }
+  .google-button{
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid #dadada;
+    color: black;
+  }
+
+  
+}
+
+
+.content-wrapper{
+  .back-button{
+    position: absolute;
+    top: 50px;
+    left: 10px;
   }
 }
