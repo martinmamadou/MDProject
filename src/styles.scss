@@ -1,3 +1,5 @@
+
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -5,10 +7,15 @@
 }
 
 $text-color: #A1A4B2;
-$text-color-dark: #3F414E;
+$text-color-dark: #313030;
 $text-family: 'Poppins', sans-serif;
-$text-size: 1.2rem;
 $title-family: 'Owners', sans-serif;
+$text-size: 1.2rem;
+$title-size: 1.75rem;
+$title-size-small: 1.5rem;
+$title-size-xs: 1.125rem;
+$text-size: 0.75rem;
+
 
 .text-center{
   text-align: center;
@@ -18,13 +25,26 @@ $title-family: 'Owners', sans-serif;
 
 p{
   font-family: $text-family;
-  color: $text-color;
+  color: $text-color-dark;
+  font-size: $text-size;
 }
 
 h1,h2,h3,h4,h5,h6{
   font-family: $title-family;
   font-weight: 800;
   color: $text-color-dark;
+}
+
+h1{
+  font-size: $title-size;
+}
+
+h2{
+  font-size: $title-size-small;
+}
+
+h3{
+  font-size: $title-size-xs;
 }
 
 
@@ -87,15 +107,33 @@ input{
   flex-direction: column;
   margin: 0 0 40px 0;
   .facebook-button{
-    background-color: #3b5998;
-    color: white;
+    position: relative;
+    background: none;
+    color: $text-color-dark;
+    border: 1px solid #dadada;
     text-transform: uppercase;
+    .facebook-icon{
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 20px;
+    }
   }
   .google-button{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-transform: uppercase;
     background: none;
     border: 1px solid #dadada;
-    color: black;
+    color: $text-color-dark;
+    .google-icon{
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 20px;
+    }
   }
 
   
@@ -104,8 +142,14 @@ input{
 
 .content-wrapper{
   .back-button{
+    background: none;
+    border: none;
     position: absolute;
-    top: 50px;
-    left: 10px;
+    top: 20px;
+    left: 0;
+    svg{
+      width: 45px;
+      height: 45px;
+    }
   }
 }

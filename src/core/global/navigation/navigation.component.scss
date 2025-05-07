@@ -30,7 +30,7 @@ li {
   align-items: center;
 }
 
-a, a:active, a:visited, a:focus, a.router-link-active {
+a, a:active i, a:visited i, a:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +39,7 @@ a, a:active, a:visited, a:focus, a.router-link-active {
   font-weight: 500;
   padding: 0.2rem 0.5rem 0.1rem 0.5rem;
   border-radius: 1.5rem;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.3s ease;
   position: relative;
   text-decoration: none !important;
   border: none !important;
@@ -50,4 +50,16 @@ a i {
   font-size: 1.1rem;
   margin-bottom: 0.2rem;
   display: block;
+  transition: all 0.3s ease;
+}
+
+a.router-link-active {
+  color: #B000EB;
+  background: rgba(176, 0, 235, 0.1);
+  transform: translateY(-5px);
+
+  i {
+    color: #B000EB;
+    transform: scale(1.1);
+  }
 }

@@ -1,17 +1,9 @@
+@import '../../../styles.scss';
+@import '../auth.component.scss';
+
 .sign-in-container{
   padding-top: 40px;
   text-align: center;
-  
-
-  
-  .email-text{
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0 auto 10px ;
-    width: 60%;
-    color: #A1A4B2;
-    margin-bottom: 20px;
-  }
   .input-container{
     display: flex;
     flex-direction: column;
@@ -32,6 +24,7 @@
     .forgot-password{
       font-size: 1.2rem;
       color: black;
+      text-decoration: underline;
     }
     .account-text{
       font-size: 1.2rem;

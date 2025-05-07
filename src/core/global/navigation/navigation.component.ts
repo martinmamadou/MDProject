@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-navigation',
-  imports: [RouterLink, NgIf],
+  imports: [RouterLink, RouterLinkActive, NgIf],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss'
 })

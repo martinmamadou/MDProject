@@ -1,4 +1,5 @@
 @import '../../../styles.scss';
+
 .auth-container {
   padding: 0;
   margin: 0;
@@ -10,21 +11,16 @@
   }
   .logo-img{
     position: absolute;
-    top: 20px;
+    top: 60px;
     left: 50%;
     transform: translate(-50%,0);
-    object-fit: contain;
-  }
-  .underline{
-    position: absolute;
-    top: 380px;
-    left: 0;
-    width: 100%;
-    height: 71px;
     object-fit: contain;
   }  
 
   .landing-text{
+    padding-top: 40px;
+    position: relative;
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,16 +29,21 @@
     margin: 50px auto 0;
     width: 85vw;
     h1{
-      font-size: 1.8rem;
       font-weight: 800;
       color: $text-color-dark;
     }
     p{
-      font-size: 1.1rem;
-      color: $text-color;
       width: 90%;
       margin-bottom: 30px;
     }
+  }
+
+  .background-svg{
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 
