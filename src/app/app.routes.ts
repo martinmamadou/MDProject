@@ -19,6 +19,8 @@ import { EmergencyFormComponent } from './admin/emergency/emergency-form/emergen
 import { ProfileComponent } from './public/profile/profile.component';
 import { PChallengesComponent } from './public/p-challenges/p-challenges.component';
 import { WelcomeComponent } from './auth/welcome/welcome.component';
+import { PChallengesListComponent } from './public/p-challenges/p-challenges-list/p-challenges-list.component';
+import { PChallengesCategoryComponent } from './public/p-challenges/p-challenges-category/p-challenges-category.component';
 
 
 
@@ -63,6 +65,10 @@ export const routes: Routes = [
       path :'profile', component: ProfileComponent 
     },
     {
-      path :'challenges', component: PChallengesComponent
-    }
+      path :'challenges', component: PChallengesComponent, children: [
+        {path: 'list', component: PChallengesListComponent},
+        {path: '', component: PChallengesCategoryComponent}
+      ]
+    },
+    
 ];

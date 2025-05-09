@@ -6,30 +6,4 @@
   }
 }
 
-.defis-category-grid {
-  margin-top: 40px;
-  height: 50vh;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
 
-.grid-item {
-  position: relative;
- background-color: $background-color;
- border-radius: 10px;
- display: flex;
- justify-content: center;
- align-items: center;
- .go-button{
-  position: absolute;
-  background: #fff;
-  color: $text-color-dark;
-  height: 35px;
-  width: 70px;
-  border: none;
-  border-radius: 50px;
-  bottom: 20px;
-  right: 15px;
-}
-}
