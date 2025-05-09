@@ -6,19 +6,26 @@
   padding: 0;
 }
 
-$text-color: #A1A4B2;
+$text-color: rgb(253, 253, 253);
 $text-color-dark: #313030;
 $text-family: 'Poppins', sans-serif;
 $title-family: 'Owners', sans-serif;
-$text-size: 1.2rem;
+
 $title-size: 1.75rem;
 $title-size-small: 1.5rem;
 $title-size-xs: 1.125rem;
 $text-size: 0.75rem;
+$background-color: #9680FF;
 
 
 .text-center{
   text-align: center;
+}
+
+.content{
+  width: 100vw;
+  min-height: 100vh;
+  padding: 0 20px 100px;
 }
 
 
@@ -50,6 +57,7 @@ h3{
 
 body{
   background: rgb(249, 249, 249);
+  min-height: 100vh;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -151,5 +159,24 @@ input{
       width: 45px;
       height: 45px;
     }
+  }
+}
+
+.welcome-section, .title-section{
+  margin-bottom: 20px;
+  p{
+    font-size: $title-size-xs;
+  }
+
+  .go-button{
+    position: absolute;
+    background: #fff;
+    color: $text-color-dark;
+    height: 35px;
+    width: 70px;
+    border: none;
+    border-radius: 50px;
+    bottom: 20px;
+    right: 15px;
   }
 }

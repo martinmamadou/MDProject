@@ -1,20 +1,64 @@
-<section class="profile-container">
+<section class="profile-container text-center">
+  <div class="photo-container">
+    <div class="photo-container-item">
+    </div>
+  </div>
+  <div class="profile-container-item">
+    <p>
+      {{user?.username}}
+    </p>
+    <p>
+      {{user?.email}}
+    </p>
+  </div>
 
-  <h1>Mon profile</h1>
+  <div class="stats-container">
+    <div class="stats-container-item">
+      <h2>Statistiques</h2>
+      <ul class="stats-container-list">
+        <li>
+          <span>
+            {{stats?.days_without_smoking}}
+          </span>
+          <span>
+            Jours sans fumer
+          </span>
+        </li>
+        <li>
+          <span>
+            {{stats?.money_saved}}
+          </span>
+          <span>
+            argent économisé
+          </span>
+        </li>
+        <li>
+          <span>
+            {{stats?.cigaret_avoided}}
+          </span>
+          <span>
+            cigarettes
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-  <p>{{user?.username}}</p>
+  <div class="badges-container">
+    <h2>Badges</h2>
+    <div class="badges-container-item">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 
-  <p>{{user?.email}}</p>
-
-  <h2>Mes stats</h2>
-
-  <p>{{stats?.cigaret_avoided}}</p>
-
-  <p>{{stats?.money_saved | currency : 'EUR' : 'symbol' : '1.2-2' }}</p>
-
-  <p>{{stats?.days_without_smoking}}</p>
-
-  <button (click)="logout()">Déconnexion</button>
-
+  <div class="total-container">
+    <p>Gains Totaux</p>
+    <span>
+      <p>{{user?.points}}</p>
+    </span>
+  </div>
 </section>
 

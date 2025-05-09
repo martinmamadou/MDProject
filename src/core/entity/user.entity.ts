@@ -6,6 +6,7 @@ export class UserEntity {
   email!: string;
   role!: string;
   smoker_type!: string;
+  points!: number;
   user_type!: string;
   password!: string;
   created_at!: Date;

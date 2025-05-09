@@ -18,6 +18,8 @@ import { EmergencyComponent } from './admin/emergency/emergency.component';
 import { EmergencyFormComponent } from './admin/emergency/emergency-form/emergency-form.component';
 import { ProfileComponent } from './public/profile/profile.component';
 import { PChallengesComponent } from './public/p-challenges/p-challenges.component';
+import { WelcomeComponent } from './auth/welcome/welcome.component';
+
 
 
 
@@ -28,7 +30,8 @@ export const routes: Routes = [
     children: [
       { path: '', component: LandingComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent }, 
+      { path: 'welcome', component: WelcomeComponent }
     ]
   },
   { path: 'admin', component: AdminComponent, canActivate: [adminGuard], 

@@ -15,7 +15,7 @@ export class NavigationComponent {
 
   shouldShowNav(): boolean {
     const currentRoute = this.router.url;
-    return !['/auth/login', '/auth/register', '/auth'].includes(currentRoute);
+    return !['/auth/login', '/auth/register', '/auth', '/auth/welcome'].includes(currentRoute);
   }
 
   logout() {
