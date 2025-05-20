@@ -1,0 +1,59 @@
+@import '../../../../styles.scss';
+@import '../p-rewards.component.scss';
+
+.main-reward-container{
+  display: flex;
+  flex-direction: column;
+  gap: 8hgpx;
+  .reward-item{
+    background: $background-color;
+    min-height: 148px;
+    border-radius: 10px;
+    padding: 20px;
+  }
+}
+.total-container{
+  margin-top: 1rem;
+}
+
+.rewards-carousel {
+  margin-top: 1rem;
+}
+
+.rewards-container {
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0;
+
+  .reward-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 200px;
+
+    h3 {
+      margin: 0.75rem 0 0 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0.25rem 0 0 0;
+      font-size: 0.75rem;
+      color: #666;
+    }
+  }
+
+  .reward-item {
+    width: 180px;
+    height: 130px;
+    background: linear-gradient(135deg, #9575cd 0%, #7e57c2 100%);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
