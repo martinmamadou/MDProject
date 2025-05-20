@@ -2,35 +2,44 @@
   <h1>Défis du jour</h1>
   <p>encore un jour sans cigarette</p>
 </div>
+
+<ng-container *ngIf="activeChallenge">
+<div class="current-challenge" *ngIf="activeChallenge">
+  <h2>
+    <span>
+      <i class="fas fa-fire fa-xs"></i>
+    </span>
+    {{activeChallenge.name}}
+  </h2>
+  <button class="btn btn-primary" (click)="finishChallenge()">Terminer le défi</button>
+</div>
+</ng-container>
+
 <div class="list-challenges-grid">
-  <div class="grid-wrapper">
+  <div class="grid-wrapper" *ngFor="let challenge of challenges" (click)="openChallengeModal(challenge)">
     <div class="challenge-item"></div>
-    <h3>Sans clope</h3>
-    <p>Avec clope</p>
+    <h3>{{challenge.name}}</h3>
+    <p>{{challenge.description}}</p>
   </div>
-  <div class="grid-wrapper">
-    <div class="challenge-item"></div>
-    <h3>Sans clope</h3>
-    <p>Avec clope</p>
-  </div>
-  <div class="grid-wrapper">
-    <div class="challenge-item"></div>
-    <h3>Sans clope</h3>
-    <p>Avec clope</p>
-  </div>
-  <div class="grid-wrapper">
-    <div class="challenge-item"></div>
-    <h3>Sans clope</h3>
-    <p>Avec clope</p>
-  </div>
-  <div class="grid-wrapper">
-    <div class="challenge-item"></div>
-    <h3>Sans clope</h3>
-    <p>Avec clope</p>
-  </div>
-  <div class="grid-wrapper">
-    <div class="challenge-item"></div>
-    <h3>Sans clope</h3>
-    <p>Avec clope</p>
+</div>
+
+<!-- Modal -->
+<div class="modal" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{selectedChallenge?.name}}</h2>
+      <button class="close-button" (click)="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p class="description">{{selectedChallenge?.description}}</p>
+      <div class="challenge-details">
+        <p><strong>Type de fumeur ciblé:</strong> {{selectedChallenge?.target}}</p>
+        <p><strong>Difficulté:</strong> {{selectedChallenge?.difficulty}}</p>
+        <p><strong>Points:</strong> {{selectedChallenge?.points}}</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" (click)="acceptChallenge()">Accepter le défi</button>
+      </div>
+    </div>
   </div>
 </div>

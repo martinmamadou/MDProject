@@ -8,7 +8,7 @@ import { ChallengeEntity } from '../entity/challenge.entity';
 })
 export class ChallengeService {
   private apiUrl = 'http://localhost:3000/challenges';
-
+  private userChallengeApi = 'http://localhost:3000/user-challenges';
   constructor(private http: HttpClient) { }
 
   getChallenges(): Observable<ChallengeEntity[]> {
@@ -30,4 +30,24 @@ export class ChallengeService {
   getChallengeByTarget(target: string): Observable<ChallengeEntity[]> {
     return this.http.get<ChallengeEntity[]>(`${this.apiUrl}/target/${target}`);
   }
+
+  acceptChallenge(challengeId: number, userId: number): Observable<any> {
+    return this.http.post(`${this.userChallengeApi}`, { id_user: userId, id_challenge: challengeId });
+  }
+
+  displayChallenge(challengeId: number): Observable<ChallengeEntity[]> {
+    return this.http.get<ChallengeEntity[]>(`${this.userChallengeApi}/challenge/${challengeId}`);
+  }
+
+  getUserChallengeByUserAndChallenge(userId: number, challengeId: number): Observable<any> {
+    return this.http.get(`${this.userChallengeApi}/user/${userId}/challenge/${challengeId}`);
+  }
+
+  completeUserChallenge(id: number, points: number): Observable<any> {
+    return this.http.put(`${this.userChallengeApi}/user/edit/${id}`, {
+      is_completed: true,
+      points_earned: points
+    });
+  }
+
 }

@@ -11,12 +11,16 @@ export class UserServiceService {
 
   constructor(private http: HttpClient) { }
 
-  deleteUser(id:number): Observable<UserEntity>{
+  deleteUser(id: number): Observable<UserEntity> {
     return this.http.delete<UserEntity>(`${this.apiUrl}/${id}/delete`)
   }
 
-  getUserConnected(): Observable<UserEntity>{
+  getUserConnected(): Observable<UserEntity> {
     return this.http.get<UserEntity>(`${this.apiUrl}/connected`)
+  }
+
+  updateUserPoints(userId: number, points: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/edit/${userId}`, { points });
   }
 }
 
