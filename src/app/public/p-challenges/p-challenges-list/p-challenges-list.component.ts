@@ -6,6 +6,7 @@ import { ChallengeService } from '../../../../core/services/challenge.service';
 import { UserServiceService } from '../../../../core/services/user-service.service';
 import { CommonModule } from '@angular/common';
 import { UserChallengeEntity } from '../../../../core/entity/user-challenge.entity';
+import { StorageService } from '../../../../core/services/storage.service';
 
 @Component({
   selector: 'app-p-challenges-list',
@@ -25,10 +26,12 @@ export class PChallengesListComponent implements OnInit {
 
   constructor(
     private challengeService: ChallengeService,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
+    console.log('🔍 Initial activeChallenge:', this.activeChallenge);
     this.loadUserAndChallenges();
   }
 
@@ -38,7 +41,6 @@ export class PChallengesListComponent implements OnInit {
         this.user = user;
         if (user.smoker_type) {
           this.getChallengesByTarget(user.smoker_type);
-          this.checkActiveChallenges();
         }
       },
       error: (error) => {
@@ -49,19 +51,35 @@ export class PChallengesListComponent implements OnInit {
 
   private checkActiveChallenges() {
     if (!this.user) return;
+    console.log('🔍 Checking active challenges...');
 
-    this.challenges.forEach(challenge => {
-      this.challengeService.getUserChallengeByUserAndChallenge(this.user.id, challenge.id).subscribe({
-        next: (userChallenge) => {
-          if (userChallenge && !userChallenge.is_completed) {
-            this.hasActiveChallenge = true;
-            this.activeChallenge = challenge;
+    // On réinitialise l'état
+    this.hasActiveChallenge = false;
+    this.activeChallenge = null;
+
+    // On crée un tableau de promesses pour tous les appels API
+    const checkPromises = this.challenges.map(challenge => {
+      return new Promise<void>((resolve) => {
+        this.challengeService.getUserChallengeByUserAndChallenge(this.user.id, challenge.id).subscribe({
+          next: (userChallenge) => {
+            if (userChallenge && !userChallenge.is_completed && !this.hasActiveChallenge) {
+              this.hasActiveChallenge = true;
+              this.activeChallenge = challenge;
+              console.log('✅ Active challenge found:', this.activeChallenge);
+            }
+            resolve();
+          },
+          error: (error) => {
+            console.error('Erreur lors de la vérification du défi actif:', error);
+            resolve();
           }
-        },
-        error: (error) => {
-          console.error('Erreur lors de la vérification du défi actif:', error);
-        }
+        });
       });
+    });
+
+    // On attend que tous les appels soient terminés
+    Promise.all(checkPromises).then(() => {
+      console.log('🔍 All challenges checked. Active challenge:', this.activeChallenge);
     });
   }
 
@@ -69,9 +87,12 @@ export class PChallengesListComponent implements OnInit {
     this.challengeService.getChallengeByTarget(target).subscribe({
       next: (challenges) => {
         this.challenges = challenges;
+        console.log('📋 Challenges loaded:', challenges);
         if (challenges.length > 0 && !this.hasActiveChallenge) {
           this.selectedChallenge = challenges[0];
         }
+        // On vérifie les défis actifs une fois que les défis sont chargés
+        this.checkActiveChallenges();
       },
       error: (error) => {
         console.error('Erreur lors du chargement des défis:', error);
@@ -96,6 +117,7 @@ export class PChallengesListComponent implements OnInit {
           this.closeModal();
           this.activeChallenge = this.selectedChallenge;
           this.hasActiveChallenge = true;
+          console.log('🎯 Challenge accepted:', this.activeChallenge);
           this.loadUserAndChallenges();
         },
         error: (error) => {
@@ -113,6 +135,7 @@ export class PChallengesListComponent implements OnInit {
   finishChallenge() {
     if (this.activeChallenge && this.user) {
       const pointsToAdd = this.activeChallenge.points;
+      console.log('🏁 Finishing challenge:', this.activeChallenge);
       this.challengeService.getUserChallengeByUserAndChallenge(this.user.id, this.activeChallenge.id).subscribe({
         next: (userChallenge) => {
           if (userChallenge) {
@@ -120,6 +143,7 @@ export class PChallengesListComponent implements OnInit {
               next: () => {
                 this.hasActiveChallenge = false;
                 this.activeChallenge = null;
+                console.log('✅ Challenge finished, activeChallenge reset to:', this.activeChallenge);
                 this.loadUserAndChallenges();
                 this.updateUserPoints(pointsToAdd);
               },

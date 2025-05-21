@@ -3,7 +3,6 @@
   <p>encore un jour sans cigarette</p>
 </div>
 
-<ng-container *ngIf="activeChallenge">
 <div class="current-challenge" *ngIf="activeChallenge">
   <h2>
     <span>
@@ -13,7 +12,6 @@
   </h2>
   <button class="btn btn-primary" (click)="finishChallenge()">Terminer le défi</button>
 </div>
-</ng-container>
 
 <div class="list-challenges-grid">
   <div class="grid-wrapper" *ngFor="let challenge of challenges" (click)="openChallengeModal(challenge)">
