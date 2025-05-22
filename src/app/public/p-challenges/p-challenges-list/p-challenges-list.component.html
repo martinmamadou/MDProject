@@ -4,13 +4,10 @@
 </div>
 
 <div class="current-challenge" *ngIf="activeChallenge">
+  <div class="progress-fill" [style.width.%]="(duration / activeChallenge.estimated_duration) * 100"></div>
   <h2>
-    <span>
-      <i class="fas fa-fire fa-xs"></i>
-    </span>
     {{activeChallenge.name}}
   </h2>
-  <button class="btn btn-primary" (click)="finishChallenge()">Terminer le défi</button>
 </div>
 
 <div class="list-challenges-grid">

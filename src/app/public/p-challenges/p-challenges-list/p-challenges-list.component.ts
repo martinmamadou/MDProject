@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ChallengeEntity } from '../../../../core/entity/challenge.entity';
 import { UserEntity } from '../../../../core/entity/user.entity';
@@ -14,7 +14,7 @@ import { StorageService } from '../../../../core/services/storage.service';
   templateUrl: './p-challenges-list.component.html',
   styleUrl: './p-challenges-list.component.scss'
 })
-export class PChallengesListComponent implements OnInit {
+export class PChallengesListComponent implements OnInit, OnDestroy {
 
   challenges: ChallengeEntity[] = [];
   user!: UserEntity;
@@ -23,6 +23,10 @@ export class PChallengesListComponent implements OnInit {
   selectedChallenge: ChallengeEntity | null = null;
   activeChallenge: ChallengeEntity | null = null;
   hasActiveChallenge: boolean = false;
+  duration: number = 0;
+
+  currentTime = new Date();
+  private timeInterval: any;
 
   constructor(
     private challengeService: ChallengeService,
@@ -33,6 +37,25 @@ export class PChallengesListComponent implements OnInit {
   ngOnInit() {
     console.log('🔍 Initial activeChallenge:', this.activeChallenge);
     this.loadUserAndChallenges();
+  }
+
+  ngOnDestroy() {
+    if (this.timeInterval) {
+      clearInterval(this.timeInterval);
+    }
+  }
+
+  private startTimeUpdate() {
+    this.timeInterval = setInterval(() => {
+      this.duration++;
+      console.log("duration", this.duration);
+
+      // Vérifier si la durée du défi est atteinte
+      if (this.activeChallenge && this.duration >= this.activeChallenge.estimated_duration) {
+        this.finishChallenge();
+        clearInterval(this.timeInterval);
+      }
+    }, 1000);
   }
 
   private loadUserAndChallenges() {
@@ -117,8 +140,10 @@ export class PChallengesListComponent implements OnInit {
           this.closeModal();
           this.activeChallenge = this.selectedChallenge;
           this.hasActiveChallenge = true;
+          // Réinitialiser la durée quand on accepte un nouveau défi
           console.log('🎯 Challenge accepted:', this.activeChallenge);
           this.loadUserAndChallenges();
+          this.startTimeUpdate();
         },
         error: (error) => {
           console.error('Erreur lors de l\'acceptation du défi:', error);
