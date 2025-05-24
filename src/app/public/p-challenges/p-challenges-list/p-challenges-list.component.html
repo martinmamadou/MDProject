@@ -11,11 +11,16 @@
 </div>
 
 <div class="list-challenges-grid">
-  <div class="grid-wrapper" *ngFor="let challenge of challenges" (click)="openChallengeModal(challenge)">
-    <div class="challenge-item"></div>
-    <h3>{{challenge.name}}</h3>
-    <p>{{challenge.description}}</p>
-  </div>
+  <ng-container *ngIf="challenges.length > 0">
+    <div class="grid-wrapper" *ngFor="let challenge of challenges" (click)="openChallengeModal(challenge)">
+      <div class="challenge-item"></div>
+      <h3>{{challenge.name}}</h3>
+      <p>{{challenge.description}}</p>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="challenges.length === 0">
+    <p>Aucun défi disponible pour le moment.</p>
+  </ng-container>
 </div>
 
 <!-- Modal -->

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { ChallengeEntity } from '../../../../core/entity/challenge.entity';
 import { UserEntity } from '../../../../core/entity/user.entity';
 import { ChallengeService } from '../../../../core/services/challenge.service';
@@ -7,6 +7,8 @@ import { UserServiceService } from '../../../../core/services/user-service.servi
 import { CommonModule } from '@angular/common';
 import { UserChallengeEntity } from '../../../../core/entity/user-challenge.entity';
 import { StorageService } from '../../../../core/services/storage.service';
+import { ChallengeCategoryService } from '../../../../core/services/challenge-category.service';
+
 
 @Component({
   selector: 'app-p-challenges-list',
@@ -31,7 +33,9 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
   constructor(
     private challengeService: ChallengeService,
     private userService: UserServiceService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private route: ActivatedRoute,
+    private challengeCategoryService: ChallengeCategoryService
   ) { }
 
   ngOnInit() {
@@ -59,16 +63,34 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
   }
 
   private loadUserAndChallenges() {
-    this.userService.getUserConnected().subscribe({
-      next: (user) => {
-        this.user = user;
-        if (user.smoker_type) {
-          this.getChallengesByTarget(user.smoker_type);
+    this.route.params.subscribe(params => {
+      const categoryName = params['category'];
+      this.userService.getUserConnected().subscribe({
+        next: (user) => {
+          this.user = user;
+          if (user.smoker_type) {
+            // D'abord obtenir l'ID de la catégorie
+            this.challengeCategoryService.getChallengeCategories().subscribe(categories => {
+              const category = categories.find(cat => cat.name === categoryName);
+              if (category) {
+                // Ensuite récupérer les challenges par catégorie avec l'ID
+                this.challengeService.getChallengeByCategory(category.id).subscribe(categoryChallenges => {
+                  console.log('📋 Challenges par catégorie:', categoryChallenges);
+                  // Ensuite filtrer par le type de fumeur
+                  this.challenges = categoryChallenges.filter(challenge =>
+                    challenge.target === user.smoker_type
+                  );
+                  console.log('📋 Challenges filtrés:', this.challenges);
+                  this.checkActiveChallenges();
+                });
+              }
+            });
+          }
+        },
+        error: (error) => {
+          console.error('Erreur lors du chargement de l\'utilisateur:', error);
         }
-      },
-      error: (error) => {
-        console.error('Erreur lors du chargement de l\'utilisateur:', error);
-      }
+      });
     });
   }
 

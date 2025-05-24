@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ChallengeCategoryEntity } from '../entity/challenge-category.entiy';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { ChallengeEntity } from '../entity/challenge.entity';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,5 +14,4 @@ export class ChallengeCategoryService {
     return this.http.get<ChallengeCategoryEntity[]>(`${this.apiUrl}`);
   }
 
-  
 }

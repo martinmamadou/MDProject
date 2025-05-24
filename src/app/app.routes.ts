@@ -69,7 +69,7 @@ export const routes: Routes = [
     },
     {
       path :'challenges', component: PChallengesComponent, children: [
-        {path: 'list', component: PChallengesListComponent},
+        {path: 'list/:category', component: PChallengesListComponent},
         {path: '', component: PChallengesCategoryComponent}
       ]
     },

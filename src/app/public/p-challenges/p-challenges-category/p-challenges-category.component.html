@@ -6,6 +6,6 @@
 <div class="defis-category-grid">
   <div class="grid-item" *ngFor="let category of categories">
     <p>{{ category.name }}</p>
-    <button class="go-button" routerLink="/challenges/list">Go</button>
+    <button class="go-button" (click)="goToChallengeList(category.name)">Go</button>
   </div>
 </div>

@@ -35,6 +35,11 @@ export class ChallengeService {
     return this.http.post(`${this.userChallengeApi}`, { id_user: userId, id_challenge: challengeId });
   }
 
+
+  getChallengeByCategory(categoryId: number): Observable<ChallengeEntity[]> {
+    return this.http.get<ChallengeEntity[]>(`${this.apiUrl}/category/${categoryId}`);
+  }
+
   displayChallenge(challengeId: number): Observable<ChallengeEntity[]> {
     return this.http.get<ChallengeEntity[]>(`${this.userChallengeApi}/challenge/${challengeId}`);
   }
