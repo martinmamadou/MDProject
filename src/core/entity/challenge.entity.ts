@@ -8,4 +8,5 @@ export class ChallengeEntity {
     is_active!: boolean;
     target!: string;
     estimated_duration!: number;
+    category_id!: number;
 }

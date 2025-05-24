@@ -8,6 +8,12 @@
     </div>
 
     <div class="form-group">
+      <label for="category_id">Catégorie</label>
+      <select id="category_id" formControlName="category_id" class="form-control">
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="description">Description</label>
       <textarea id="description" formControlName="description" class="form-control"></textarea>
     </div>

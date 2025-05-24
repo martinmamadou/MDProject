@@ -19,7 +19,9 @@
     </div>
   </ng-container>
   <ng-container *ngIf="challenges.length === 0">
-    <p>Aucun défi disponible pour le moment.</p>
+    <div class="no-challenges">
+      <p>Aucun défi disponible pour le moment.</p>
+    </div>
   </ng-container>
 </div>
 
@@ -34,7 +36,7 @@
       <p class="description">{{selectedChallenge?.description}}</p>
       <div class="challenge-details">
         <p><strong>Type de fumeur ciblé:</strong> {{selectedChallenge?.target}}</p>
-        <p><strong>Difficulté:</strong> {{selectedChallenge?.difficulty}}</p>
+        <p><strong>Temps estimé:</strong> {{selectedChallenge?.estimated_duration}} m </p>
         <p><strong>Points:</strong> {{selectedChallenge?.points}}</p>
       </div>
       <div class="modal-actions">
