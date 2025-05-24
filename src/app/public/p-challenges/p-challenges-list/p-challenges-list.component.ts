@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { UserChallengeEntity } from '../../../../core/entity/user-challenge.entity';
 import { StorageService } from '../../../../core/services/storage.service';
 import { ChallengeCategoryService } from '../../../../core/services/challenge-category.service';
-
+import { ActiveChallengeService } from '../../../../core/services/active-challenge.service';
 
 @Component({
   selector: 'app-p-challenges-list',
@@ -27,39 +27,43 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
   hasActiveChallenge: boolean = false;
   duration: number = 0;
 
-  currentTime = new Date();
-  private timeInterval: any;
-
   constructor(
     private challengeService: ChallengeService,
     private userService: UserServiceService,
     private storageService: StorageService,
     private route: ActivatedRoute,
-    private challengeCategoryService: ChallengeCategoryService
+    private challengeCategoryService: ChallengeCategoryService,
+    private activeChallengeService: ActiveChallengeService
   ) { }
 
   ngOnInit() {
-    console.log('🔍 Initial activeChallenge:', this.activeChallenge);
+    // Vérifier d'abord s'il y a un défi actif dans le localStorage
+    const savedChallenge = localStorage.getItem('activeChallenge');
+    const savedStartTime = localStorage.getItem('challengeStartTime');
+
+    if (savedChallenge && savedStartTime) {
+      const challenge = JSON.parse(savedChallenge);
+      this.activeChallenge = challenge;
+      this.hasActiveChallenge = true;
+    }
+
+    // S'abonner aux changements du défi actif
+    this.activeChallengeService.getActiveChallenge().subscribe(challenge => {
+      this.activeChallenge = challenge;
+      this.hasActiveChallenge = !!challenge;
+    });
+
+    // S'abonner aux changements de la durée
+    this.activeChallengeService.getDuration().subscribe(duration => {
+      this.duration = duration;
+    });
+
+    // Charger les défis et l'utilisateur
     this.loadUserAndChallenges();
   }
 
   ngOnDestroy() {
-    if (this.timeInterval) {
-      clearInterval(this.timeInterval);
-    }
-  }
-
-  private startTimeUpdate() {
-    this.timeInterval = setInterval(() => {
-      this.duration++;
-      console.log("duration", this.duration);
-
-      // Vérifier si la durée du défi est atteinte
-      if (this.activeChallenge && this.duration >= this.activeChallenge.estimated_duration) {
-        this.finishChallenge();
-        clearInterval(this.timeInterval);
-      }
-    }, 1000);
+    // Pas besoin de nettoyer le timer car il est géré par le service
   }
 
   private loadUserAndChallenges() {
@@ -69,19 +73,20 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
         next: (user) => {
           this.user = user;
           if (user.smoker_type) {
-            // D'abord obtenir l'ID de la catégorie
             this.challengeCategoryService.getChallengeCategories().subscribe(categories => {
               const category = categories.find(cat => cat.name === categoryName);
               if (category) {
-                // Ensuite récupérer les challenges par catégorie avec l'ID
                 this.challengeService.getChallengeByCategory(category.id).subscribe(categoryChallenges => {
                   console.log('📋 Challenges par catégorie:', categoryChallenges);
-                  // Ensuite filtrer par le type de fumeur
                   this.challenges = categoryChallenges.filter(challenge =>
                     challenge.target === user.smoker_type
                   );
                   console.log('📋 Challenges filtrés:', this.challenges);
-                  this.checkActiveChallenges();
+
+                  // Ne pas réinitialiser le défi actif s'il existe déjà
+                  if (!this.hasActiveChallenge) {
+                    this.checkActiveChallenges();
+                  }
                 });
               }
             });
@@ -98,19 +103,12 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
     if (!this.user) return;
     console.log('🔍 Checking active challenges...');
 
-    // On réinitialise l'état
-    this.hasActiveChallenge = false;
-    this.activeChallenge = null;
-
-    // On crée un tableau de promesses pour tous les appels API
     const checkPromises = this.challenges.map(challenge => {
       return new Promise<void>((resolve) => {
         this.challengeService.getUserChallengeByUserAndChallenge(this.user.id, challenge.id).subscribe({
           next: (userChallenge) => {
             if (userChallenge && !userChallenge.is_completed && !this.hasActiveChallenge) {
-              this.hasActiveChallenge = true;
-              this.activeChallenge = challenge;
-              console.log('✅ Active challenge found:', this.activeChallenge);
+              this.activeChallengeService.setActiveChallenge(challenge);
             }
             resolve();
           },
@@ -122,9 +120,8 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
       });
     });
 
-    // On attend que tous les appels soient terminés
     Promise.all(checkPromises).then(() => {
-      console.log('🔍 All challenges checked. Active challenge:', this.activeChallenge);
+      console.log('🔍 All challenges checked');
     });
   }
 
@@ -136,7 +133,6 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
         if (challenges.length > 0 && !this.hasActiveChallenge) {
           this.selectedChallenge = challenges[0];
         }
-        // On vérifie les défis actifs une fois que les défis sont chargés
         this.checkActiveChallenges();
       },
       error: (error) => {
@@ -160,12 +156,8 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
       this.challengeService.acceptChallenge(this.selectedChallenge.id, this.user.id).subscribe({
         next: () => {
           this.closeModal();
-          this.activeChallenge = this.selectedChallenge;
-          this.hasActiveChallenge = true;
-          // Réinitialiser la durée quand on accepte un nouveau défi
-          console.log('🎯 Challenge accepted:', this.activeChallenge);
+          this.activeChallengeService.setActiveChallenge(this.selectedChallenge!);
           this.loadUserAndChallenges();
-          this.startTimeUpdate();
         },
         error: (error) => {
           console.error('Erreur lors de l\'acceptation du défi:', error);
@@ -188,9 +180,7 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
           if (userChallenge) {
             this.challengeService.completeUserChallenge(userChallenge.id, pointsToAdd).subscribe({
               next: () => {
-                this.hasActiveChallenge = false;
-                this.activeChallenge = null;
-                console.log('✅ Challenge finished, activeChallenge reset to:', this.activeChallenge);
+                this.activeChallengeService.clearActiveChallenge();
                 this.loadUserAndChallenges();
                 this.updateUserPoints(pointsToAdd);
               },

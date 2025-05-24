@@ -1,0 +1,11 @@
+
+<p>Test</p>
+<div class="active-challenge" *ngIf="activeChallenge">
+  <div class="challenge-info">
+    <h3>{{ activeChallenge.name }}</h3>
+    <p>Temps restant: {{ remainingTime }} secondes</p>
+  </div>
+  <div class="progress-bar">
+    <div class="progress" [style.width.%]="progressPercentage"></div>
+  </div>
+</div>

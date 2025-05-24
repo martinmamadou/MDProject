@@ -5,12 +5,13 @@ import { UserEntity } from '../core/entity/user.entity';
 import { CommonModule, NgFor } from '@angular/common';
 import { AuthServiceService } from '../core/services/auth-service.service';
 import { NavigationComponent } from "../core/global/navigation/navigation.component";
+import { ActiveChallengeComponent } from './shared/active-challenge/active-challenge.component';
 
 @Component({
   selector: 'app-root',
-  imports: [NgFor, CommonModule, RouterOutlet, NavigationComponent],
+  standalone: true,
+  imports: [NgFor, CommonModule, RouterOutlet, NavigationComponent, ActiveChallengeComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'md-client';
