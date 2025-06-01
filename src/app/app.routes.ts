@@ -24,8 +24,7 @@ import { PChallengesCategoryComponent } from './public/p-challenges/p-challenges
 import { PRewardsComponent } from './public/p-rewards/p-rewards.component';
 import { PRewardsListComponent } from './public/p-rewards/p-rewards-list/p-rewards-list.component';
 import { PRewardsCategoryComponent } from './public/p-rewards/p-rewards-category/p-rewards-category.component';
-
-
+import { RewardDetailComponent } from './public/p-rewards/reward-detail/reward-detail.component';
 
 
 export const routes: Routes = [
@@ -76,8 +75,10 @@ export const routes: Routes = [
     {
       path :'rewards', component : PRewardsComponent, children: [
         {path:'', component: PRewardsCategoryComponent},
-        {path: 'list', component: PRewardsListComponent}
+        {path: 'list/:category', component: PRewardsListComponent},
+        {path: 'details/:id', component: RewardDetailComponent}
       ]
+
     }
     
 ];

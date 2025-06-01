@@ -1,0 +1,48 @@
+@import '../../../../styles.scss';
+
+.reward-img {
+  background: red;
+  height: 200px;
+  border-radius: 30px;
+  margin-bottom: 30px;
+}
+
+.rewards-name {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 30px;
+  .left-side {
+    flex: 0.5;
+  }
+  .right-side {
+    flex: 0.5;
+    text-align: right;
+    p{
+      width: 70%;
+      text-align: center;
+      background: #B000EB;
+      border-radius: 30px;
+      padding: 15px;
+      color: $text-color;
+    }
+   
+  }
+}
+
+.description-container {
+  margin-bottom: 30px;
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+}
+
+.btn{
+  margin-top: 30px;
+  padding: 15px;
+}
+
+.btn-primary {
+  border-radius: 30px;
+}

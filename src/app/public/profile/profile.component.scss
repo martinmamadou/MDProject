@@ -2,6 +2,7 @@
 
 .profile-container{
   .photo-container{
+    position: relative;
     height: 175px;
     background: $background-color;
     display: flex;
@@ -26,6 +27,15 @@
         bottom: 4px;
         border-radius: 50%;
       }
+    }
+    .settings{
+      padding: 20px;
+      border-radius: 50%;
+      position: absolute;
+      top: 196px;
+      right: 130px;
+      width: 20px;
+      height: 20px;
     }
   }
   .profile-container-item{

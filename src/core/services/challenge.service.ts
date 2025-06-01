@@ -54,5 +54,4 @@ export class ChallengeService {
       points_earned: points
     });
   }
-
 }

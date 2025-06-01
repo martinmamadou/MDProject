@@ -75,6 +75,7 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
           if (user.smoker_type) {
             this.challengeCategoryService.getChallengeCategories().subscribe(categories => {
               const category = categories.find(cat => cat.name === categoryName);
+              console.log("oui",category);
               if (category) {
                 this.challengeService.getChallengeByCategory(category.id).subscribe(categoryChallenges => {
                   console.log('📋 Challenges par catégorie:', categoryChallenges);

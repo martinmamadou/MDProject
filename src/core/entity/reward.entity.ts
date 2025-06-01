@@ -4,4 +4,5 @@ export class RewardEntity {
   description!: string;
   points_needed!: number;
   is_active!: boolean;
+  category_id!: number;
 }
