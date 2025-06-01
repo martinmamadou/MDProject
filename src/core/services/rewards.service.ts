@@ -68,4 +68,12 @@ export class RewardsService {
       })
     );
   }
+
+  LoadRandomRewardLimit5(): Observable<RewardEntity[]> {
+    return this.getRewards().pipe(
+      map((rewards: RewardEntity[]) => {
+        return rewards.slice(0, 5);
+      })
+    );
+  }
 }

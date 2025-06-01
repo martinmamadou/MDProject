@@ -5,19 +5,30 @@ import { ChallengeEntity } from '../../core/entity/challenge.entity';
 import { ChallengeService } from '../../core/services/challenge.service';
 import { StatsEntity } from '../../core/entity/stats.entity';
 import { StatsService } from '../../core/services/stats.service';
+import { RewardEntity } from '../../core/entity/reward.entity';
+import { RewardsService } from '../../core/services/rewards.service';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   user!: UserEntity
   challenge!: ChallengeEntity;
+  rewards!: RewardEntity[];
   stats!: StatsEntity;
   imageUrl = ('../../assets/img/Logo.png');
 
-  constructor(private userService: UserServiceService, private challengeService: ChallengeService, private statsService: StatsService) {
+  constructor(
+    private userService: UserServiceService,
+    private challengeService: ChallengeService,
+    private statsService: StatsService,
+    private rewardService: RewardsService,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -27,6 +38,7 @@ export class HomeComponent {
       this.loadStats();
     });
     this.loadRandomChallenge();
+    this.loadRewards();
   }
 
   loadRandomChallenge() {
@@ -42,4 +54,20 @@ export class HomeComponent {
       console.log(this.stats);
     });
   }
+
+  loadRewards() {
+    this.rewardService.LoadRandomRewardLimit5().subscribe(res => {
+      this.rewards = res;
+      console.log(this.rewards);
+    });
+  }
+
+  getRewardImage(reward: RewardEntity): string {
+    return `http://localhost:3000/uploads/${reward.image_url}`;
+  }
+
+  goToReward(reward: RewardEntity) {
+    this.router.navigate(['/rewards/details', reward.id]);
+  }
 }
+

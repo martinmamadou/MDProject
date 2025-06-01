@@ -37,30 +37,10 @@
   <section class="home-rewards">
     <h2>Récompenses</h2>
     <div class="rewards-container">
-      <div class="reward-wrapper">
-        <div class="reward-item"></div>
-        <h3>Bon chez Healty</h3>
+      <div (click)="goToReward(reward)" class="reward-wrapper" *ngFor="let reward of rewards">
+        <img [src]="getRewardImage(reward)" alt="reward image">
+        <h3>{{reward.name}}</h3>
         <p>Pour les réguliers</p>
-      </div>
-      <div class="reward-wrapper">
-        <div class="reward-item"></div>
-        <h3>Place de ciné</h3>
-        <p>MEDITATION • 5-10 MIN</p>
-      </div>
-      <div class="reward-wrapper">
-        <div class="reward-item"></div>
-        <h3>Bon d'achat</h3>
-        <p>MEDITATION • 5-10 MIN</p>
-      </div>
-      <div class="reward-wrapper">
-        <div class="reward-item"></div>
-        <h3>Réduction</h3>
-        <p>MEDITATION • 5-10 MIN</p>
-      </div>
-      <div class="reward-wrapper">
-        <div class="reward-item"></div>
-        <h3>Cadeau surprise</h3>
-        <p>MEDITATION • 5-10 MIN</p>
       </div>
     </div>
   </section>
