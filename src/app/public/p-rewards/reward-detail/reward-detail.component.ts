@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './reward-detail.component.scss'
 })
 export class RewardDetailComponent {
-  
+
 }

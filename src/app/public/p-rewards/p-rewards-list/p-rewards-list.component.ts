@@ -19,6 +19,7 @@ export class PRewardsListComponent implements OnInit {
   categoryName: string = '';
   showModal: boolean = false;
   selectedReward: RewardEntity | null = null;
+  private baseUrl = 'http://localhost:3000/uploads/';
 
   constructor(
     private userService: UserServiceService,
@@ -47,11 +48,15 @@ export class PRewardsListComponent implements OnInit {
         if (category) {
           this.rewardsService.getRewardsByCategory(category.id).subscribe(rewards => {
             console.log("Récompenses trouvées:", rewards);
-            this.rewards = rewards;
+            // Construire l'URL complète pour chaque récompense
+            this.rewards = rewards.map(reward => ({
+              ...reward,
+              image_url: reward.image_url ? `${this.baseUrl}${reward.image_url}` : ''
+            }));
           });
         }
       });
     });
   }
-   
+
 }
