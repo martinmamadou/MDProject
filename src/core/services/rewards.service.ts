@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { RewardEntity } from '../entity/reward.entity';
 
 @Injectable({
@@ -59,4 +59,13 @@ export class RewardsService {
     return this.http.post(`${this.apiUrl}/${id}/upload`, formData);
   }
 
+  
+  loadRandomReward(): Observable<RewardEntity> {
+    return this.getRewards().pipe(
+      map((rewards: RewardEntity[]) => {
+        const randomIndex = Math.floor(Math.random() * rewards.length);
+        return rewards[randomIndex];
+      })
+    );
+  }
 }

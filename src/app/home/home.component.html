@@ -16,7 +16,10 @@
   </div>
   <div class="grid-container">
     <div class="div1 grid-item">
-      <p>Défi du jour</p>
+      <div class="challenge-content">
+        <p>Défi du jour</p>
+        <p>{{challenge.name}}</p>
+      </div>
       <button class="go-button"> Go </button>
     </div>
     <div class="div2 grid-item">
@@ -24,7 +27,10 @@
       <button class="go-button"> Go </button>
     </div>
     <div class="div3 grid-item">
-      <p>test</p>
+      <div class="stats-content">
+        <p>Déja {{stats.cigaret_avoided}} cigarettes non fumer</p>
+        <p>{{stats.money_saved}} économisés</p>
+      </div>
     </div>
   </div>
 

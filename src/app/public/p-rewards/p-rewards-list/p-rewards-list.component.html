@@ -11,17 +11,16 @@
 </div>
 
 <div class="main-reward-container" *ngIf="rewards.length > 0">
-  <div class="reward-wrapper">
+  <div class="reward-wrapper" (click)="navigateToRewardDetails(rewards[0].id)" style="cursor: pointer;">
     <img [src]="rewards[0].image_url" alt="reward-image">
-
-      <h2>{{ rewards[0].name }}</h2>
-      <p>{{ rewards[0].points_needed }} points</p>
+    <h2>{{ rewards[0].name }}</h2>
+    <p>{{ rewards[0].points_needed }} points</p>
   </div>
 </div>
 
 <section class="rewards-carousel">
   <div class="rewards-container">
-    <div class="reward-wrapper" *ngFor="let reward of rewards.slice(1)">
+    <div class="reward-wrapper" *ngFor="let reward of rewards.slice(1)" (click)="navigateToRewardDetails(reward.id)" style="cursor: pointer;">
       <img [src]="reward.image_url" alt="reward-image" width="100px">
       <h3>{{ reward.name }}</h3>
       <p>{{ reward.description }}</p>

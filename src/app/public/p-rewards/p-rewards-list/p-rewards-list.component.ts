@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserEntity } from '../../../../core/entity/user.entity';
 import { UserServiceService } from '../../../../core/services/user-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RewardsService } from '../../../../core/services/rewards.service';
 import { RewardEntity } from '../../../../core/entity/reward.entity';
 import { CommonModule } from '@angular/common';
@@ -25,6 +25,7 @@ export class PRewardsListComponent implements OnInit {
     private userService: UserServiceService,
     private route: ActivatedRoute,
     private rewardsService: RewardsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -57,6 +58,10 @@ export class PRewardsListComponent implements OnInit {
         }
       });
     });
+  }
+
+  navigateToRewardDetails(rewardId: number) {
+    this.router.navigate(['/rewards/details', rewardId]);
   }
 
 }

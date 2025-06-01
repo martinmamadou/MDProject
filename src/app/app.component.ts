@@ -6,6 +6,8 @@ import { CommonModule, NgFor } from '@angular/common';
 import { AuthServiceService } from '../core/services/auth-service.service';
 import { NavigationComponent } from "../core/global/navigation/navigation.component";
 import { ActiveChallengeComponent } from './shared/active-challenge/active-challenge.component';
+import { ChallengeEntity } from '../core/entity/challenge.entity';
+import { ChallengeService } from '../core/services/challenge.service';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +18,9 @@ import { ActiveChallengeComponent } from './shared/active-challenge/active-chall
 export class AppComponent {
   title = 'md-client';
   users: UserEntity[] = [];
+  challenge!: ChallengeEntity;
 
-  constructor(private dataService: DataService, private authService: AuthServiceService) { }
+  constructor(private dataService: DataService, private authService: AuthServiceService, private challengeService: ChallengeService) { }
 
   ngOnInit(): void {
     this.dataService.getData().subscribe(res => {
@@ -25,6 +28,8 @@ export class AppComponent {
     })
     console.log(this.authService.isLoggedIn());
   }
+
+
 
   logout() {
     this.authService.logout();

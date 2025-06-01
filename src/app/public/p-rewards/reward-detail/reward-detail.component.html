@@ -3,17 +3,16 @@
   <p>offre toi une pause gourmande</p>
 </div>
 
-<div class="reward-img">
-  <span></span>
-</div>
+<img [src]="reward.image_url" alt="reward image">
+
 
 <div class="rewards-name">
   <div class="left-side">
-    <h2>Nom de la recompense</h2>
-    <p>Description de la recompense</p>
+    <h2>{{ reward.name }}</h2>
+    <p>{{ reward.description }}</p>
   </div>
   <div class="right-side">
-    <p>100</p>
+    <p>{{ reward.points_needed }} points</p>
   </div>
 
 </div>
@@ -26,4 +25,17 @@
 <h2>Conditions Générales</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque similique incidunt nulla minus repudiandae porro id a non rerum sequi fugit in eveniet quo esse provident assumenda molestias maxime praesentium dolorem, harum facere earum hic.</p>
 
-<button class="btn btn-primary">debloquer la récompense</button>
+<div class="button-container">
+  <button 
+    class="btn" 
+    [class.btn-primary]="user.points >= reward.points_needed"
+    [class.btn-disabled]="user.points < reward.points_needed"
+    (click)="claimReward()"
+    [disabled]="user.points < reward.points_needed"
+    [style.--progress]="progressPercentage + '%'">
+    <span *ngIf="user.points >= reward.points_needed">Débloquer la récompense</span>
+    <span *ngIf="user.points < reward.points_needed">Points insuffisants</span>
+  </button>
+</div>
+
+

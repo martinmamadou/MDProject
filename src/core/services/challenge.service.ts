@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ChallengeEntity } from '../entity/challenge.entity';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,14 @@ export class ChallengeService {
       is_completed: true,
       points_earned: points
     });
+  }
+
+  loadRandomChallenge(): Observable<ChallengeEntity> {
+    return this.getChallenges().pipe(
+      map(challenges => {
+        const randomIndex = Math.floor(Math.random() * challenges.length);
+        return challenges[randomIndex];
+      })
+    );
   }
 }
