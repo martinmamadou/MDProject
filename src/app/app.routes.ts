@@ -25,6 +25,7 @@ import { PRewardsComponent } from './public/p-rewards/p-rewards.component';
 import { PRewardsListComponent } from './public/p-rewards/p-rewards-list/p-rewards-list.component';
 import { PRewardsCategoryComponent } from './public/p-rewards/p-rewards-category/p-rewards-category.component';
 import { RewardDetailComponent } from './public/p-rewards/reward-detail/reward-detail.component';
+import { SmokerProfileComponent } from './auth/smoker-profile/smoker-profile.component';
 
 
 export const routes: Routes = [
@@ -79,6 +80,10 @@ export const routes: Routes = [
         {path: 'details/:id', component: RewardDetailComponent}
       ]
 
+    },
+    {
+      path :'smoker-profile', component: SmokerProfileComponent
     }
+    
     
 ];

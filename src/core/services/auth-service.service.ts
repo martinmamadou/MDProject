@@ -17,9 +17,13 @@ export class AuthServiceService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  public Register(user: UserEntity) {
-    return this.http.post(`${this.apiUrl}/register`, user).pipe(
-      tap(() => this.router.navigate(['/auth/login']))
+  public Register(user: UserEntity): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/register`, user).pipe(
+      tap((response: LoginResponse) => {
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        this.router.navigate(['/auth/welcome']);
+      })
     );
   }
 
@@ -64,5 +68,9 @@ export class AuthServiceService {
     return this.http.get<UserEntity>(`${this.apiUrl}/profile`).pipe(
       tap(user => console.log('👤 Profil récupéré:', user))
     );
+  }
+
+  public updateUser(profileData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/profile`, profileData);
   }
 }

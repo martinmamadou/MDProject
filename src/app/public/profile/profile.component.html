@@ -51,10 +51,9 @@
   <div class="badges-container">
     <h2>Badges</h2>
     <div class="badges-container-item">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span *ngFor="let badge of badges">
+        <img [src]="getBadgeImage(badge)" [alt]="badge.challenge.name" width="100" height="100">
+      </span>
     </div>
   </div>
 
@@ -64,5 +63,9 @@
       <p>{{user?.points}}</p>
     </span>
   </div>
+
+  <button class="btn-primary btn" (click)="logout()">
+    déconnexion
+  </button>
 </section>
 

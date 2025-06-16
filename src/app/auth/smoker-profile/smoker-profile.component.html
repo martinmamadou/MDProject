@@ -1,0 +1,138 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="card-header">
+      <h3>Profil Fumeur</h3>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="(currentPage / 4) * 100"></div>
+      </div>
+    </div>
+    <div class="card-content">
+      <form [formGroup]="smokerForm" (ngSubmit)="onSubmit()">
+        <!-- Page 1: Informations de base -->
+        <div class="form-page" *ngIf="currentPage === 1">
+          <div class="form-group">
+            <label for="packet_per_day">Nombre de paquets par jour</label>
+            <input type="number" id="packet_per_day" formControlName="packet_per_day" min="0" step="0.5">
+          </div>
+
+          <div class="form-group">
+            <label for="packet_price">Prix du paquet (€)</label>
+            <input type="number" id="packet_price" formControlName="packet_price" min="0" step="0.01">
+          </div>
+
+          <div class="form-group">
+            <label for="smoker_duration">Durée de consommation (années)</label>
+            <input type="number" id="smoker_duration" formControlName="smoker_duration" min="0">
+          </div>
+        </div>
+
+        <!-- Page 2: Habitudes de consommation -->
+        <div class="form-page" *ngIf="currentPage === 2">
+          <div class="form-group">
+            <label for="smoking_time">À quel moment fumez-vous le plus ?</label>
+            <select id="smoking_time" formControlName="smoking_time">
+              <option value="">Sélectionnez une option</option>
+              <option value="morning">Le matin</option>
+              <option value="afternoon">L'après-midi</option>
+              <option value="evening">Le soir</option>
+              <option value="all_day">Toute la journée</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="smoking_motivation">Quelle est votre principale motivation pour fumer ?</label>
+            <select id="smoking_motivation" formControlName="smoking_motivation">
+              <option value="">Sélectionnez une option</option>
+              <option value="stress">Gestion du stress</option>
+              <option value="social">Aspect social</option>
+              <option value="habit">Habitude</option>
+              <option value="pleasure">Plaisir</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="quit_attempts">Avez-vous déjà essayé d'arrêter de fumer ?</label>
+            <select id="quit_attempts" formControlName="quit_attempts">
+              <option value="">Sélectionnez une option</option>
+              <option value="never">Jamais</option>
+              <option value="once">Une fois</option>
+              <option value="multiple">Plusieurs fois</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Page 3: Impact sur la santé -->
+        <div class="form-page" *ngIf="currentPage === 3">
+          <div class="form-group">
+            <label for="health_concerns">Quels sont vos principaux soucis de santé liés au tabac ?</label>
+            <select id="health_concerns" formControlName="health_concerns">
+              <option value="">Sélectionnez une option</option>
+              <option value="breathing">Problèmes respiratoires</option>
+              <option value="energy">Manque d'énergie</option>
+              <option value="stress">Stress et anxiété</option>
+              <option value="none">Aucun souci particulier</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="smoking_impact">Comment le tabac affecte-t-il votre quotidien ?</label>
+            <select id="smoking_impact" formControlName="smoking_impact">
+              <option value="">Sélectionnez une option</option>
+              <option value="physical">Impact physique</option>
+              <option value="social">Impact social</option>
+              <option value="financial">Impact financier</option>
+              <option value="none">Pas d'impact notable</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="support_system">Avez-vous un entourage qui vous soutient pour arrêter ?</label>
+            <select id="support_system" formControlName="support_system">
+              <option value="">Sélectionnez une option</option>
+              <option value="family">Famille</option>
+              <option value="friends">Amis</option>
+              <option value="both">Les deux</option>
+              <option value="none">Aucun soutien</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Page 4: Objectifs et préférences -->
+        <div class="form-page" *ngIf="currentPage === 4">
+          <div class="form-group">
+            <label for="goal">Quel est votre objectif principal ?</label>
+            <select id="goal" formControlName="goal">
+              <option value="">Sélectionnez une option</option>
+              <option value="quit">Arrêter complètement</option>
+              <option value="reduce">Réduire la consommation</option>
+              <option value="health">Améliorer la santé</option>
+              <option value="money">Économiser de l'argent</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="preferred_method">Quelle méthode préférez-vous pour arrêter ?</label>
+            <select id="preferred_method" formControlName="preferred_method">
+              <option value="">Sélectionnez une option</option>
+              <option value="cold_turkey">Arrêt brutal</option>
+              <option value="gradual">Réduction progressive</option>
+              <option value="substitutes">Substituts nicotiniques</option>
+              <option value="therapy">Thérapie comportementale</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="last_cigaret_smoked">Quand avez-vous fumé votre dernière cigarette ?</label>
+            <input type="datetime-local" id="last_cigaret_smoked" formControlName="last_cigaret_smoked">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" *ngIf="currentPage > 1" (click)="previousPage()">Précédent</button>
+          <button type="button" *ngIf="currentPage < 4" (click)="nextPage()">Suivant</button>
+          <button type="submit" *ngIf="currentPage === 4" [disabled]="!smokerForm.valid">Terminer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

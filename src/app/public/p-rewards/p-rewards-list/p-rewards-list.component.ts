@@ -54,6 +54,7 @@ export class PRewardsListComponent implements OnInit {
               ...reward,
               image_url: reward.image_url ? `${this.baseUrl}${reward.image_url}` : ''
             }));
+            console.log("les rewards", this.rewards);
           });
         }
       });

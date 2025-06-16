@@ -22,5 +22,9 @@ export class UserServiceService {
   updateUserPoints(userId: number, points: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/edit/${userId}`, { points });
   }
+
+  getUserBadges(userId: number): Observable<any> {
+    return this.http.get(`http://localhost:3000/user-challenges/user/${userId}`);
+  }
 }
 
