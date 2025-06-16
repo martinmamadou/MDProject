@@ -54,6 +54,7 @@ $text-color-dark: #313030;
 $text-family: 'Poppins', sans-serif;
 $title-family: 'Owners', sans-serif;
 $primary-color: #B000EB;
+$secondary-color: #9680FF;
 
 $title-size: 1.75rem;
 $title-size-small: 1.5rem;
@@ -96,6 +97,14 @@ h2{
 
 h3{
   font-size: $title-size-xs;
+}
+
+li{
+  list-style: none;
+}
+
+.hide{
+  opacity: 0;
 }
 
 

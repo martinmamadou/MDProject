@@ -26,6 +26,11 @@ import { PRewardsListComponent } from './public/p-rewards/p-rewards-list/p-rewar
 import { PRewardsCategoryComponent } from './public/p-rewards/p-rewards-category/p-rewards-category.component';
 import { RewardDetailComponent } from './public/p-rewards/reward-detail/reward-detail.component';
 import { SmokerProfileComponent } from './auth/smoker-profile/smoker-profile.component';
+import { ProfileSettingsComponent } from './public/profile/profile-settings/profile-settings.component';
+import { ProfileInfosComponent } from './public/profile/profile-infos/profile-infos.component';
+import { CompteComponent } from './public/profile/compte/compte.component';
+import { PUrgencesComponent } from './public/p-urgences/p-urgences.component';
+import { PUrgencesCategoryComponent } from './public/p-urgences/p-urgences-category/p-urgences-category.component';
 
 
 export const routes: Routes = [
@@ -65,7 +70,13 @@ export const routes: Routes = [
     ]
   },
     {
-      path :'profile', component: ProfileComponent 
+      path :'profile', component: ProfileComponent, children: [
+        {path: '', component: ProfileInfosComponent},
+        {path: 'settings', component: ProfileSettingsComponent}
+      ]
+    },
+    {
+      path: 'profile/settings/account', component: CompteComponent
     },
     {
       path :'challenges', component: PChallengesComponent, children: [
@@ -80,6 +91,11 @@ export const routes: Routes = [
         {path: 'details/:id', component: RewardDetailComponent}
       ]
 
+    },
+    {
+      path :'urgences', component: PUrgencesComponent, children: [
+        {path: '', component: PUrgencesCategoryComponent}
+      ]
     },
     {
       path :'smoker-profile', component: SmokerProfileComponent

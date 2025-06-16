@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmergencyService } from '../../../../core/services/emergency.service';
 import { CommonModule } from '@angular/common';
 import { EmergencyEntity } from '../../../../core/entity/emergency.entity';
+import { EmergencyCategoryEntity } from '../../../../core/entity/emergency-category.entity';
+import { EmergencyCategoryService } from '../../../../core/services/emergency-category.service';
 
 @Component({
   selector: 'app-emergency-form',
@@ -16,10 +18,11 @@ export class EmergencyFormComponent implements OnInit {
   emergencyForm: FormGroup;
   isEditMode = false;
   emergencyId: number | null = null;
-
+  categories: EmergencyCategoryEntity[] = [];
   constructor(
     private fb: FormBuilder,
     private emergencyService: EmergencyService,
+    private emergencyCategoryService: EmergencyCategoryService,
     private route: ActivatedRoute,
     public router: Router
   ) {
@@ -27,7 +30,7 @@ export class EmergencyFormComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       tips: ['', Validators.required],
-      category: ['', Validators.required]
+      category_id: ['', Validators.required]
     });
   }
 
@@ -40,6 +43,9 @@ export class EmergencyFormComponent implements OnInit {
         this.emergencyForm.patchValue(emergency);
       });
     }
+    this.emergencyCategoryService.getEmergencyCategories().subscribe(categories => {
+      this.categories = categories;
+    });
   }
 
   onSubmit() {

@@ -1,0 +1,167 @@
+@import '../../../../styles.scss';
+
+.profile-container{
+  .photo-container{
+    position: relative;
+    height: 175px;
+    background: $background-color;
+    display: flex;
+    margin-bottom: 70px;
+    .photo-container-item{
+      height: 125px;
+      width: 125px;
+      border-radius: 50%;
+      background: #fff;
+      margin: auto auto 0;
+      transform: translateY(50%);
+      position: relative;
+    
+      &::before{
+        padding: 10px;
+        content: '';
+        position: absolute;
+        background: $background-color;
+        top: 4px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        border-radius: 50%;
+      }
+    }
+    .settings{
+      padding: 20px;
+      border-radius: 50%;
+      position: absolute;
+      top: 196px;
+      right: 130px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .profile-container-item{
+    animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+    
+    p{
+      &:first-child{
+        font-size: $title-size-small;
+        font-weight: 800;
+      }
+    }
+  }
+  .stats-container{
+    margin-top: 50px;
+    text-align: left;
+    padding: 0 20px;
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+  }
+
+  .stats-container-list{
+    margin: 20px 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    li{
+      display: block;
+      animation: popIn 0.5s ease forwards;
+      opacity: 0;
+      
+      &:nth-child(1) { animation-delay: 0.6s; }
+      &:nth-child(2) { animation-delay: 0.8s; }
+      &:nth-child(3) { animation-delay: 1.0s; }
+      
+      span{
+        text-align: center;
+        font-size:$text-size;
+        font-family: $text-family;
+        display: block;
+      }
+    }
+  }
+  .badges-container{
+    margin-top: 50px;
+    text-align: left;
+    padding: 0 20px;
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: 1.2s;
+    opacity: 0;
+   
+    
+    h2{
+      margin-bottom: 20px;
+    }
+    .badges-container-item{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      justify-content: space-between;
+      span{
+        width: 80px;
+        height: 80px;
+        background: none;
+        overflow: hidden;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid $background-color;
+        animation: popIn 0.5s ease forwards;
+        opacity: 0;
+        
+        &:nth-child(1) { animation-delay: 1.4s; }
+        &:nth-child(2) { animation-delay: 1.6s; }
+        &:nth-child(3) { animation-delay: 1.8s; }
+      }
+    }
+  }
+  .total-container{
+    height: 95px;
+    margin-top: 50px;
+    text-align: left;
+    padding: 30px 0;
+    border-radius: 10px;
+    margin: 40px 20px 0;
+    gap: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $background-color;
+    animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 2.0s;
+    opacity: 0;
+    
+    p{
+      &:first-child{
+        color: $text-color;
+        font-size: $title-size-small;
+      }
+    }
+    span{
+      background: #fff;
+      padding: 10px 50px;
+      border-radius: 30px;
+      p{
+        color: $background-color;
+        font-size: $text-size;
+      }
+    }
+  }
+  
+  .round-container{
+    position: absolute;
+    top: 196px;
+    right: 130px;
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+    background: #A0A3B1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
+}
