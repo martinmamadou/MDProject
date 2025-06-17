@@ -14,6 +14,7 @@ interface LoginResponse {
 })
 export class AuthServiceService {
   private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl2 = 'http://localhost:3000/users';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -71,6 +72,16 @@ export class AuthServiceService {
   }
 
   public updateUser(profileData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/profile`, profileData);
+    if (!profileData.id) {
+      console.error('ID manquant dans les données de mise à jour');
+      return new Observable(subscriber => {
+        subscriber.error('ID manquant dans les données de mise à jour');
+      });
+    }
+
+    console.log('Envoi de la requête de mise à jour avec les données:', profileData);
+    console.log('URL de la requête:', `${this.apiUrl2}/edit/${profileData.id}`);
+
+    return this.http.put(`${this.apiUrl2}/edit/${profileData.id}`, profileData);
   }
 }

@@ -43,7 +43,7 @@ export class EmergencyFormComponent implements OnInit {
         this.emergencyForm.patchValue(emergency);
       });
     }
-    this.emergencyCategoryService.getEmergencyCategories().subscribe(categories => {
+    this.emergencyService.getEmergencyCategories().subscribe(categories => {
       this.categories = categories;
     });
   }

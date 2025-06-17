@@ -6,6 +6,11 @@ export class UserEntity {
   email!: string;
   role!: string;
   smoker_type!: string;
+  packet_per_day!: number;
+  packet_price!: number;
+  smoke_duration!: number;
+  goal!: string;
+  last_cigaret_smoked!: Date;
   points!: number;
   user_type!: string;
   password!: string;

@@ -31,6 +31,7 @@ import { ProfileInfosComponent } from './public/profile/profile-infos/profile-in
 import { CompteComponent } from './public/profile/compte/compte.component';
 import { PUrgencesComponent } from './public/p-urgences/p-urgences.component';
 import { PUrgencesCategoryComponent } from './public/p-urgences/p-urgences-category/p-urgences-category.component';
+import { PUrgencesListComponent } from './public/p-urgences/p-urgences-list/p-urgences-list.component';
 
 
 export const routes: Routes = [
@@ -94,7 +95,8 @@ export const routes: Routes = [
     },
     {
       path :'urgences', component: PUrgencesComponent, children: [
-        {path: '', component: PUrgencesCategoryComponent}
+        {path: '', component: PUrgencesCategoryComponent},
+        {path: 'list/:category', component: PUrgencesListComponent}
       ]
     },
     {
