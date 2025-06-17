@@ -4,20 +4,8 @@
 </div>
 
 <div class="defis-category-grid">
-  <div class="grid-item" >
-    <p>envie soudaine</p>
-    
-  </div>
-  <div class="grid-item" >
-    <p>envie soudaine</p>
-    
-  </div>
-  <div class="grid-item" >
-    <p>envie soudaine</p>
-    
-  </div>
-  <div class="grid-item" >
-    <p>envie soudaine</p>
+  <div class="grid-item"  *ngFor="let urgence of urgences" (click)="goToUrgencesList(urgence.name)">
+    <p>{{urgence.name}}</p>
   </div>
 </div>
 

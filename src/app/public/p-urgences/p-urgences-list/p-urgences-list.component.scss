@@ -1,0 +1,65 @@
+@import '../../../../styles.scss';
+@import '../p-urgences-category/p-urgences-category.component.scss';
+
+.urgence-wrapper {
+  border-bottom: 1px solid $text-color;
+  overflow: hidden;
+  &:first-child {
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+  }
+  &:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+  }
+}
+
+.urgence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: $primary-color;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary-color;
+  }
+
+  h2 {
+    font-family: $text-family;
+    font-weight: 500;
+    font-size: $text-size;
+    color: $text-color;
+    margin: 0;
+  }
+
+  .toggle-icon {
+    font-size: 0.8rem;
+  }
+}
+
+.urgence-description {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.1s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 1rem;
+  background-color: $background-color;
+
+  &.expanded {
+    max-height: 500px;
+    padding: 1rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+ 
+}
+
+.pro {
+  margin-top: 1rem;
+}
