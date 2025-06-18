@@ -71,7 +71,7 @@ export const routes: Routes = [
     ]
   },
     {
-      path :'profile', component: ProfileComponent, children: [
+      path :'profile', component: ProfileComponent, canActivate: [authGuard], children: [
         {path: '', component: ProfileInfosComponent},
         {path: 'settings', component: ProfileSettingsComponent}
       ]
@@ -80,13 +80,13 @@ export const routes: Routes = [
       path: 'profile/settings/account', component: CompteComponent
     },
     {
-      path :'challenges', component: PChallengesComponent, children: [
+      path :'challenges', component: PChallengesComponent, canActivate: [authGuard], children: [
         {path: 'list/:category', component: PChallengesListComponent},
         {path: '', component: PChallengesCategoryComponent}
       ]
     },
     {
-      path :'rewards', component : PRewardsComponent, children: [
+      path :'rewards', component : PRewardsComponent, canActivate: [authGuard], children: [
         {path:'', component: PRewardsCategoryComponent},
         {path: 'list/:category', component: PRewardsListComponent},
         {path: 'details/:id', component: RewardDetailComponent}
@@ -94,7 +94,7 @@ export const routes: Routes = [
 
     },
     {
-      path :'urgences', component: PUrgencesComponent, children: [
+      path :'urgences', component: PUrgencesComponent, canActivate: [authGuard], children: [
         {path: '', component: PUrgencesCategoryComponent},
         {path: 'list/:category', component: PUrgencesListComponent}
       ]

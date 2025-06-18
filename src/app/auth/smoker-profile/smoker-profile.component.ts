@@ -69,7 +69,7 @@ export class SmokerProfileComponent implements OnInit {
   }
 
   nextPage(): void {
-    if (this.currentPage < 4) {
+    if (this.currentPage < 6) {
       this.currentPage++;
     }
   }
@@ -107,19 +107,26 @@ export class SmokerProfileComponent implements OnInit {
   private calculateConsumptionScore(formData: any): number {
     let score = 0;
 
-    // Score basé sur le nombre de paquets par jour
-    const packetsPerDay = formData.packet_per_day;
-    if (packetsPerDay <= 0.5) score += 1;
-    else if (packetsPerDay <= 1) score += 2;
-    else if (packetsPerDay <= 2) score += 3;
-    else score += 4;
+    // Score basé sur le nombre de cigarettes par jour
+    const cigarettesPerDay = formData.packet_per_day;
+    if (cigarettesPerDay <= 0.25) score += 1; // 1-5 cigarettes
+    else if (cigarettesPerDay <= 0.5) score += 2; // 6-10 cigarettes
+    else if (cigarettesPerDay <= 0.75) score += 3; // 11-20 cigarettes
+    else score += 4; // Plus de 20 cigarettes
 
     // Score basé sur la durée de consommation
     const duration = formData.smoker_duration;
-    if (duration <= 5) score += 1;
-    else if (duration <= 10) score += 2;
-    else if (duration <= 20) score += 3;
-    else score += 4;
+    if (duration <= 1) score += 1; // Moins d'un an
+    else if (duration <= 2) score += 2; // 1-3 ans
+    else if (duration <= 4) score += 3; // 3-5 ans
+    else if (duration <= 7) score += 4; // 5-10 ans
+    else score += 5; // Plus de 10 ans
+
+    return score;
+  }
+
+  private calculateMotivationScore(formData: any): number {
+    let score = 0;
 
     // Score basé sur le moment de consommation
     switch (formData.smoking_time) {
@@ -129,12 +136,6 @@ export class SmokerProfileComponent implements OnInit {
       case 'all_day': score += 4; break;
     }
 
-    return score;
-  }
-
-  private calculateMotivationScore(formData: any): number {
-    let score = 0;
-
     // Score basé sur la motivation
     switch (formData.smoking_motivation) {
       case 'stress': score += 3; break;
@@ -143,18 +144,18 @@ export class SmokerProfileComponent implements OnInit {
       case 'pleasure': score += 1; break;
     }
 
+    return score;
+  }
+
+  private calculateHealthScore(formData: any): number {
+    let score = 0;
+
     // Score basé sur les tentatives d'arrêt
     switch (formData.quit_attempts) {
       case 'never': score += 1; break;
       case 'once': score += 2; break;
       case 'multiple': score += 3; break;
     }
-
-    return score;
-  }
-
-  private calculateHealthScore(formData: any): number {
-    let score = 0;
 
     // Score basé sur les préoccupations de santé
     switch (formData.health_concerns) {
@@ -164,6 +165,12 @@ export class SmokerProfileComponent implements OnInit {
       case 'none': score += 1; break;
     }
 
+    return score;
+  }
+
+  private calculateGoalScore(formData: any): number {
+    let score = 0;
+
     // Score basé sur l'impact du tabac
     switch (formData.smoking_impact) {
       case 'physical': score += 4; break;
@@ -172,39 +179,25 @@ export class SmokerProfileComponent implements OnInit {
       case 'none': score += 1; break;
     }
 
-    return score;
-  }
-
-  private calculateGoalScore(formData: any): number {
-    let score = 0;
-
-    // Score basé sur l'objectif
-    switch (formData.goal) {
-      case 'quit': score += 4; break;
-      case 'reduce': score += 3; break;
-      case 'health': score += 2; break;
-      case 'money': score += 1; break;
-    }
-
-    // Score basé sur la méthode préférée
-    switch (formData.preferred_method) {
-      case 'cold_turkey': score += 4; break;
-      case 'gradual': score += 3; break;
-      case 'substitutes': score += 2; break;
-      case 'therapy': score += 1; break;
+    // Score basé sur le système de soutien
+    switch (formData.support_system) {
+      case 'family': score += 3; break;
+      case 'friends': score += 2; break;
+      case 'both': score += 4; break;
+      case 'none': score += 1; break;
     }
 
     return score;
   }
 
   private determineSmokerType(score: number): SmokerType {
-    if (score <= 8) {
+    if (score <= 10) {
       return {
         type: 'casual',
         description: 'Fumeur occasionnel avec une faible dépendance',
         score: score
       };
-    } else if (score <= 12) {
+    } else if (score <= 15) {
       return {
         type: 'regular',
         description: 'Fumeur modéré avec une dépendance moyenne',

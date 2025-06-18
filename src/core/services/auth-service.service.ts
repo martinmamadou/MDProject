@@ -14,12 +14,13 @@ interface LoginResponse {
 })
 export class AuthServiceService {
   private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl3 = 'https://md-api.onrender.com/auth/';
   private apiUrl2 = 'http://localhost:3000/users';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   public Register(user: UserEntity): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/register`, user).pipe(
+    return this.http.post<LoginResponse>(`${this.apiUrl3}/register`, user).pipe(
       tap((response: LoginResponse) => {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user', JSON.stringify(response.user));
@@ -29,7 +30,7 @@ export class AuthServiceService {
   }
 
   public Login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials).pipe(
+    return this.http.post<LoginResponse>(`${this.apiUrl3}/login`, credentials).pipe(
       tap((response: LoginResponse) => {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user', JSON.stringify(response.user));
