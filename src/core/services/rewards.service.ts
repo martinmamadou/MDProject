@@ -2,52 +2,56 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { RewardEntity } from '../entity/reward.entity';
+import { ApiConfigService } from './api-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RewardsService {
 
-  private apiUrl = 'http://localhost:3000/rewards';
-  private apiUrlCategory = 'http://localhost:3000/rewards-category';
-  private apiUrlUserReward = 'http://localhost:3000/user-reward';
-
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private apiConfig: ApiConfigService
+  ) { }
 
   getRewards(): Observable<RewardEntity[]> {
-    return this.http.get<RewardEntity[]>(`${this.apiUrl}`);
+    return this.http.get<RewardEntity[]>(`${this.apiConfig.buildApiUrl('/rewards')}`);
   }
 
   getRewardById(id: number): Observable<RewardEntity> {
-    return this.http.get<RewardEntity>(`${this.apiUrl}/${id}`);
+    return this.http.get<RewardEntity>(`${this.apiConfig.buildApiUrl('/rewards')}/${id}`);
   }
 
   createReward(reward: RewardEntity): Observable<RewardEntity> {
-    return this.http.post<RewardEntity>(`${this.apiUrl}/create`, reward);
+    return this.http.post<RewardEntity>(`${this.apiConfig.buildApiUrl('/rewards')}/create`, reward);
   }
 
   updateReward(reward: RewardEntity): Observable<RewardEntity> {
-    return this.http.put<RewardEntity>(`${this.apiUrl}/edit/${reward.id}`, reward);
+    return this.http.put<RewardEntity>(`${this.apiConfig.buildApiUrl('/rewards')}/edit/${reward.id}`, reward);
   }
 
   deleteReward(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/remove/${id}`);
+    return this.http.delete<void>(`${this.apiConfig.buildApiUrl('/rewards')}/remove/${id}`);
   }
 
   getRewardsCategory(): Observable<RewardEntity[]> {
-    return this.http.get<RewardEntity[]>(`${this.apiUrlCategory}`);
+    return this.http.get<RewardEntity[]>(`${this.apiConfig.buildApiUrl('/rewards-category')}`);
   }
 
   getRewardsByCategory(categoryId: number): Observable<RewardEntity[]> {
-    return this.http.get<RewardEntity[]>(`${this.apiUrl}/category/${categoryId}`);
+    return this.http.get<RewardEntity[]>(`${this.apiConfig.buildApiUrl('/rewards')}/category/${categoryId}`);
+  }
+
+  exchangeReward(userId: number, rewardId: number): Observable<any> {
+    return this.http.post(`${this.apiConfig.buildApiUrl('/user-reward')}/exchange`, { userId, rewardId });
   }
 
   getUserRewards(userId: number): Observable<RewardEntity[]> {
-    return this.http.get<RewardEntity[]>(`${this.apiUrlUserReward}/user/${userId}`);
+    return this.http.get<RewardEntity[]>(`${this.apiConfig.buildApiUrl('/user-reward')}/${userId}`);
   }
 
   claimReward(userId: number, rewardId: number): Observable<RewardEntity> {
-    return this.http.post<RewardEntity>(`${this.apiUrlUserReward}/create`, {
+    return this.http.post<RewardEntity>(`${this.apiConfig.buildApiUrl('/user-reward')}/create`, {
       id_user: userId,
       id_reward: rewardId
     });
@@ -56,10 +60,10 @@ export class RewardsService {
   uploadImage(id: number, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post(`${this.apiUrl}/${id}/upload`, formData);
+    return this.http.post(`${this.apiConfig.buildApiUrl('/rewards')}/${id}/upload`, formData);
   }
 
-  
+
   loadRandomReward(): Observable<RewardEntity> {
     return this.getRewards().pipe(
       map((rewards: RewardEntity[]) => {

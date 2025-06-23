@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FumeurTypeEntity } from '../entity/fumeur-type.entity';
-
+import { ApiConfigService } from './api-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FumeurTypeService {
-private apiUrl = 'http://localhost:3000/fumeur-type/admin';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private apiConfig: ApiConfigService
+  ) { }
 
-    getType(){
-        return this.http.get<FumeurTypeEntity[]>(this.apiUrl)
-    }
+  getType(): Observable<FumeurTypeEntity[]> {
+    return this.http.get<FumeurTypeEntity[]>(`${this.apiConfig.buildApiUrl('/fumeur-type')}/admin`);
+  }
 }

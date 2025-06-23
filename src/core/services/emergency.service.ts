@@ -3,43 +3,43 @@ import { EmergencyEntity } from '../entity/emergency.entity';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmergencyCategoryEntity } from '../entity/emergency-category.entity';
+import { ApiConfigService } from './api-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmergencyService {
 
-  private apiUrl = 'http://localhost:3000/emergency';
-  private apiUrlCategory = 'http://localhost:3000/emergency-category';
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private apiConfig: ApiConfigService
+  ) { }
 
   getEmergency(): Observable<EmergencyEntity[]> {
-    return this.http.get<EmergencyEntity[]>(`${this.apiUrl}`);
+    return this.http.get<EmergencyEntity[]>(`${this.apiConfig.buildApiUrl('/emergency')}`);
   }
 
   getEmergencyById(id: number): Observable<EmergencyEntity> {
-    return this.http.get<EmergencyEntity>(`${this.apiUrl}/${id}`);
+    return this.http.get<EmergencyEntity>(`${this.apiConfig.buildApiUrl('/emergency')}/${id}`);
   }
 
   createEmergency(emergency: EmergencyEntity): Observable<EmergencyEntity> {
-    return this.http.post<EmergencyEntity>(`${this.apiUrl}/create`, emergency);
+    return this.http.post<EmergencyEntity>(`${this.apiConfig.buildApiUrl('/emergency')}/create`, emergency);
   }
 
   updateEmergency(emergency: EmergencyEntity): Observable<EmergencyEntity> {
-    return this.http.put<EmergencyEntity>(`${this.apiUrl}/edit/${emergency.id}`, emergency);
+    return this.http.put<EmergencyEntity>(`${this.apiConfig.buildApiUrl('/emergency')}/edit/${emergency.id}`, emergency);
   }
 
   deleteEmergency(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/remove/${id}`);
+    return this.http.delete<void>(`${this.apiConfig.buildApiUrl('/emergency')}/remove/${id}`);
   }
 
   getEmergencyCategories(): Observable<EmergencyCategoryEntity[]> {
-    return this.http.get<EmergencyCategoryEntity[]>(`${this.apiUrlCategory}`);
+    return this.http.get<EmergencyCategoryEntity[]>(`${this.apiConfig.buildApiUrl('/emergency-category')}`);
   }
 
   getEmergencyByCategory(categoryId: number): Observable<EmergencyEntity[]> {
-    return this.http.get<EmergencyEntity[]>(`${this.apiUrl}/category/${categoryId}`);
+    return this.http.get<EmergencyEntity[]>(`${this.apiConfig.buildApiUrl('/emergency')}/category/${categoryId}`);
   }
-
-  
 }

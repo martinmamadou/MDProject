@@ -3,54 +3,68 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ChallengeEntity } from '../entity/challenge.entity';
 import { map } from 'rxjs/operators';
+import { ApiConfigService } from './api-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChallengeService {
-  private apiUrl = 'http://localhost:3000/challenges';
-  private userChallengeApi = 'http://localhost:3000/user-challenges';
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient,
+    private apiConfig: ApiConfigService
+  ) { }
 
   getChallenges(): Observable<ChallengeEntity[]> {
-    return this.http.get<ChallengeEntity[]>(this.apiUrl);
-  }
-
-  createChallenge(challenge: ChallengeEntity): Observable<ChallengeEntity> {
-    return this.http.post<ChallengeEntity>(`${this.apiUrl}/create/admin`, challenge);
-  }
-
-  updateChallenge(challenge: ChallengeEntity): Observable<ChallengeEntity> {
-    return this.http.put<ChallengeEntity>(`${this.apiUrl}/edit/admin/${challenge.id}`, challenge);
+    return this.http.get<ChallengeEntity[]>(`${this.apiConfig.buildApiUrl('/challenges')}`);
   }
 
   getChallengeById(id: number): Observable<ChallengeEntity> {
-    return this.http.get<ChallengeEntity>(`${this.apiUrl}/${id}`);
+    return this.http.get<ChallengeEntity>(`${this.apiConfig.buildApiUrl('/challenges')}/${id}`);
+  }
+
+  createChallenge(challenge: ChallengeEntity): Observable<ChallengeEntity> {
+    return this.http.post<ChallengeEntity>(`${this.apiConfig.buildApiUrl('/challenges')}/create`, challenge);
+  }
+
+  updateChallenge(challenge: ChallengeEntity): Observable<ChallengeEntity> {
+    return this.http.put<ChallengeEntity>(`${this.apiConfig.buildApiUrl('/challenges')}/edit/${challenge.id}`, challenge);
+  }
+
+  deleteChallenge(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiConfig.buildApiUrl('/challenges')}/remove/${id}`);
   }
 
   getChallengeByTarget(target: string): Observable<ChallengeEntity[]> {
-    return this.http.get<ChallengeEntity[]>(`${this.apiUrl}/target/${target}`);
+    return this.http.get<ChallengeEntity[]>(`${this.apiConfig.buildApiUrl('/challenges')}/target/${target}`);
   }
 
-  acceptChallenge(challengeId: number, userId: number): Observable<any> {
-    return this.http.post(`${this.userChallengeApi}`, { id_user: userId, id_challenge: challengeId });
+  getUserChallenges(userId: number): Observable<ChallengeEntity[]> {
+    return this.http.get<ChallengeEntity[]>(`${this.apiConfig.buildApiUrl('/user-challenges')}/${userId}`);
   }
 
+  acceptChallenge(userId: number, challengeId: number): Observable<any> {
+    return this.http.post(`${this.apiConfig.buildApiUrl('/user-challenges')}/accept`, { userId, challengeId });
+  }
+
+  completeChallenge(userId: number, challengeId: number): Observable<any> {
+    return this.http.post(`${this.apiConfig.buildApiUrl('/user-challenges')}/complete`, { userId, challengeId });
+  }
 
   getChallengeByCategory(categoryId: number): Observable<ChallengeEntity[]> {
-    return this.http.get<ChallengeEntity[]>(`${this.apiUrl}/category/${categoryId}`);
+    return this.http.get<ChallengeEntity[]>(`${this.apiConfig.buildApiUrl('/challenges')}/category/${categoryId}`);
   }
 
   displayChallenge(challengeId: number): Observable<ChallengeEntity[]> {
-    return this.http.get<ChallengeEntity[]>(`${this.userChallengeApi}/challenge/${challengeId}`);
+    return this.http.get<ChallengeEntity[]>(`${this.apiConfig.buildApiUrl('/user-challenges')}/challenge/${challengeId}`);
   }
 
   getUserChallengeByUserAndChallenge(userId: number, challengeId: number): Observable<any> {
-    return this.http.get(`${this.userChallengeApi}/user/${userId}/challenge/${challengeId}`);
+    return this.http.get(`${this.apiConfig.buildApiUrl('/user-challenges')}/user/${userId}/challenge/${challengeId}`);
   }
 
   completeUserChallenge(id: number, points: number): Observable<any> {
-    return this.http.put(`${this.userChallengeApi}/user/edit/${id}`, {
+    return this.http.put(`${this.apiConfig.buildApiUrl('/user-challenges')}/user/edit/${id}`, {
       is_completed: true,
       points_earned: points
     });

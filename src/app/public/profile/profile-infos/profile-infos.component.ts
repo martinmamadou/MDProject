@@ -6,6 +6,8 @@ import { AuthServiceService } from '../../../../core/services/auth-service.servi
 import { StatsEntity } from '../../../../core/entity/stats.entity';
 import { UserEntity } from '../../../../core/entity/user.entity';
 import { StatsService } from '../../../../core/services/stats.service';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
+
 @Component({
   selector: 'app-profile-infos',
   imports: [CurrencyPipe, CommonModule],
@@ -16,7 +18,14 @@ export class ProfileInfosComponent implements OnInit {
   user?: UserEntity;
   stats?: StatsEntity;
   badges?: any[];
-  constructor(private UserService: UserServiceService, private StatsService: StatsService, private AuthService: AuthServiceService, private router: Router) {
+
+  constructor(
+    private UserService: UserServiceService,
+    private StatsService: StatsService,
+    private AuthService: AuthServiceService,
+    private router: Router,
+    private apiConfig: ApiConfigService
+  ) {
   }
 
   ngOnInit(): void {
@@ -33,12 +42,9 @@ export class ProfileInfosComponent implements OnInit {
   }
 
   getBadgeImage(badge: any): string {
-    console.log("le badge", `http://localhost:3000/uploads/${badge.challenge.badge_url}`);
-    return `${badge.challenge.badge_url}`;
+    console.log("le badge", this.apiConfig.buildImageUrl(badge.challenge.badge_url));
+    return this.apiConfig.buildImageUrl(badge.challenge.badge_url);
   }
-
-
-
 
   openSettings() {
     console.log("openSettings");

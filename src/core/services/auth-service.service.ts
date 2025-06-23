@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { UserEntity } from '../entity/user.entity';
 import { map, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { ApiConfigService } from './api-config.service';
 
 interface LoginResponse {
   access_token: string;
@@ -13,14 +14,15 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private apiUrl = 'http://localhost:3000/auth';
-  private apiUrl3 = 'https://md-api.onrender.com/auth';
-  private apiUrl2 = 'http://localhost:3000/users';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private apiConfig: ApiConfigService
+  ) { }
 
   public Register(user: UserEntity): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl3}/register`, user).pipe(
+    return this.http.post<LoginResponse>(`${this.apiConfig.buildApiUrl('/auth')}/register`, user).pipe(
       tap((response: LoginResponse) => {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user', JSON.stringify(response.user));
@@ -30,7 +32,7 @@ export class AuthServiceService {
   }
 
   public Login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post<LoginResponse>(`${this.apiUrl3}/login`, credentials).pipe(
+    return this.http.post<LoginResponse>(`${this.apiConfig.buildApiUrl('/auth')}/login`, credentials).pipe(
       tap((response: LoginResponse) => {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user', JSON.stringify(response.user));
@@ -53,7 +55,7 @@ export class AuthServiceService {
   }
 
   public getCurrentUser(): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.apiUrl}/profile`)
+    return this.http.get<UserEntity>(`${this.apiConfig.buildApiUrl('/auth')}/profile`)
   }
 
   public isAdmin(): Observable<boolean> {
@@ -67,7 +69,7 @@ export class AuthServiceService {
   }
 
   public getProfile(): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${this.apiUrl}/profile`).pipe(
+    return this.http.get<UserEntity>(`${this.apiConfig.buildApiUrl('/auth')}/profile`).pipe(
       tap(user => console.log('👤 Profil récupéré:', user))
     );
   }
@@ -81,8 +83,8 @@ export class AuthServiceService {
     }
 
     console.log('Envoi de la requête de mise à jour avec les données:', profileData);
-    console.log('URL de la requête:', `${this.apiUrl2}/edit/${profileData.id}`);
+    console.log('URL de la requête:', `${this.apiConfig.buildApiUrl('/users')}/edit/${profileData.id}`);
 
-    return this.http.put(`${this.apiUrl2}/edit/${profileData.id}`, profileData);
+    return this.http.put(`${this.apiConfig.buildApiUrl('/users')}/edit/${profileData.id}`, profileData);
   }
 }

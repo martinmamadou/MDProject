@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { NgIf } from '@angular/common';
+import { UserEntity } from '../../entity/user.entity';
 
 @Component({
   selector: 'app-navigation',
@@ -12,6 +13,7 @@ import { NgIf } from '@angular/common';
 export class NavigationComponent {
   authService = inject(AuthServiceService)
   router = inject(Router)
+  user: UserEntity | null = null;
 
   shouldShowNav(): boolean {
     const currentRoute = this.router.url;
@@ -26,6 +28,7 @@ export class NavigationComponent {
   ngOnInit() {
     this.authService.getProfile().subscribe({
       next: (user) => {
+        this.user = user;
         console.log('Rôle utilisateur:', user.role);
       },
       error: (err) => console.error('Erreur:', err)

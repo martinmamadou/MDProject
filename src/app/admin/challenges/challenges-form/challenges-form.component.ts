@@ -35,7 +35,8 @@ export class ChallengesFormComponent implements OnInit {
       badges: ['', Validators.required],
       is_active: [false],
       estimated_duration: ['', [Validators.required, Validators.min(0)]],
-      category_id: ['', Validators.required]
+      category_id: ['', Validators.required],
+      image_url: ['', Validators.required]
     });
   }
 
