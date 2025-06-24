@@ -4,7 +4,7 @@ export class ChallengeEntity {
     description!: string;
     difficulty!: string;
     points!: number;
-    badges!: string;
+    badge_url!: string;
     is_active!: boolean;
     target!: string;
     estimated_duration!: number;

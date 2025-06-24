@@ -5,6 +5,7 @@ import { RewardsService } from '../../../../core/services/rewards.service';
 import { CommonModule } from '@angular/common';
 import { RewardEntity } from '../../../../core/entity/reward.entity';
 import { RewardCategoryEntity } from '../../../core/entity/reward-category.entity';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 
 @Component({
   selector: 'app-rewards-form',
@@ -27,7 +28,8 @@ export class RewardsFormComponent implements OnInit {
     private fb: FormBuilder,
     private rewardsService: RewardsService,
     private route: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    private apiConfigService: ApiConfigService
   ) {
     this.rewardForm = this.fb.group({
       name: ['', Validators.required],
@@ -50,7 +52,7 @@ export class RewardsFormComponent implements OnInit {
       this.rewardsService.getRewardById(this.rewardId).subscribe(reward => {
         this.rewardForm.patchValue(reward);
         if (reward.image_url) {
-          this.previewUrl = `http://localhost:3000/uploads/${reward.image_url}`;
+          this.previewUrl = this.apiConfigService.buildImageUrl(reward.image_url);
         }
       });
     }

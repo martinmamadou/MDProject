@@ -48,7 +48,7 @@ describe('HomeComponent', () => {
     description: 'Description du défi',
     difficulty: 'easy',
     points: 100,
-    badges: 'badge1',
+    badge_url: 'badge1',
     is_active: true,
     target: 'daily',
     estimated_duration: 7,

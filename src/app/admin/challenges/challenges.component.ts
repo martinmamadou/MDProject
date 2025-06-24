@@ -15,4 +15,10 @@ export class ChallengesComponent {
   constructor(private challengeService: ChallengeService) {
     this.challengeService.getChallenges().subscribe(challenges => this.challenges = challenges);
   }
+
+  deleteChallenge(id: number) {
+    this.challengeService.deleteChallenge(id).subscribe(() => {
+      this.challenges = this.challenges.filter(challenge => challenge.id !== id);
+    });
+  }
 }

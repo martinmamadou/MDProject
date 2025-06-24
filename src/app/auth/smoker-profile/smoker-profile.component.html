@@ -28,24 +28,7 @@
         <div class="form-page" *ngIf="currentPage === 1">
           <div class="form-group">
             <label for="packet_per_day">Combien de cigarettes fumez-vous par jour en moyenne ?</label>
-            <div class="radio-group">
-              <div class="radio-option">
-                <input type="radio" id="cigarettes_1_5" name="packet_per_day" value="0.25" formControlName="packet_per_day">
-                <label for="cigarettes_1_5">1-5 cigarettes</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="cigarettes_6_10" name="packet_per_day" value="0.5" formControlName="packet_per_day">
-                <label for="cigarettes_6_10">6-10 cigarettes</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="cigarettes_11_15" name="packet_per_day" value="0.75" formControlName="packet_per_day">
-                <label for="cigarettes_11_15">11-20 cigarettes</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="cigarettes_more" name="packet_per_day" value="1.5" formControlName="packet_per_day">
-                <label for="cigarettes_more">Plus de 20 cigarettes</label>
-              </div>
-            </div>
+            <input type="number" name="packet_per_day" formControlName="packet_per_day">
           </div>
 
           <div class="form-group">

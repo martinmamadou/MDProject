@@ -24,6 +24,7 @@
 }
 
 .grid-item {
+  overflow: hidden;
   position: relative;
   background-color: $background-color;
   border-radius: 10px;
@@ -51,6 +52,14 @@
     bottom: 20px;
     right: 15px;
   }
+
+  svg{
+    position: absolute;
+    top: -20px;
+    left: 65px;
+    object-fit: cover;
+    z-index: 1;
+  }
 }
 
 @keyframes slideIn {
@@ -71,5 +80,24 @@
   animation-delay: 0.4s;
   transform-origin: center;
   will-change: transform, opacity;
+}
+
+.grid-item:nth-child(1),
+.grid-item:nth-child(4),
+.grid-item:nth-child(5),
+.grid-item:nth-child(8) {
+  background-color: $background-color;
+  svg{
+    path{
+      fill: #8975ee;
+    }
+  }
+}
+
+.grid-item:nth-child(2),
+.grid-item:nth-child(3),
+.grid-item:nth-child(6),
+.grid-item:nth-child(7) {
+  background-color: $primary-color;
 }
 

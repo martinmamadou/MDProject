@@ -38,7 +38,7 @@
           <i class="fas fa-edit"></i>
           Modifier
         </button>
-        <button class="admin-button delete" routerLink="/admin/challenges/delete/{{ challenge.id }}">
+        <button class="admin-button delete" (click)="deleteChallenge(challenge.id)">
           <i class="fas fa-trash"></i>
           Supprimer
         </button>

@@ -24,15 +24,21 @@ export class ChallengeService {
   }
 
   createChallenge(challenge: ChallengeEntity): Observable<ChallengeEntity> {
-    return this.http.post<ChallengeEntity>(`${this.apiConfig.buildApiUrl('/challenges')}/create`, challenge);
+    return this.http.post<ChallengeEntity>(`${this.apiConfig.buildApiUrl('/challenges')}/create/admin`, challenge);
   }
 
   updateChallenge(challenge: ChallengeEntity): Observable<ChallengeEntity> {
-    return this.http.put<ChallengeEntity>(`${this.apiConfig.buildApiUrl('/challenges')}/edit/${challenge.id}`, challenge);
+    return this.http.put<ChallengeEntity>(`${this.apiConfig.buildApiUrl('/challenges')}/edit/admin/${challenge.id}`, challenge);
   }
 
   deleteChallenge(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiConfig.buildApiUrl('/challenges')}/remove/${id}`);
+    return this.http.delete<void>(`${this.apiConfig.buildApiUrl('/challenges')}/remove/admin/${id}`);
+  }
+
+  uploadImage(id: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiConfig.buildApiUrl('/challenges')}/${id}/upload-badge`, formData);
   }
 
   getChallengeByTarget(target: string): Observable<ChallengeEntity[]> {

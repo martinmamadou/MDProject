@@ -1,10 +1,14 @@
-
 <div class="title-section">
   <h1>Tout les défis</h1>
   <p>encore un jour sans cigarette</p>
 </div>
 <div class="defis-category-grid">
-  <div class="grid-item" *ngFor="let category of categories">
+  
+  <div class="grid-item" *ngFor="let category of categories; let i = index">
+    <svg width="121" height="99" viewBox="0 0 121 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M94.6244 7.79333C94.6244 7.79333 77.4183 -3.60282 56.46 2.40887C35.4991 8.41868 21.1917 27.2057 9.19691 42.117C-2.79973 57.0307 -2.27589 75.3918 9.94502 86.7701C22.1659 98.1484 34.476 88.9842 54.3584 93.3755C74.2409 97.7667 78.8813 101.924 97.9126 94.876C116.944 87.8277 126.146 62.2136 117.837 39.4709C109.525 16.7262 94.6244 7.79333 94.6244 7.79333Z" fill="#8B00B9"/>
+      </svg> 
+    <div [innerHTML]="getSvgForCategory(i)"></div>            
     <p>{{ category.name }}</p>
     <button class="go-button" (click)="goToChallengeList(category.name)">Go</button>
   </div>

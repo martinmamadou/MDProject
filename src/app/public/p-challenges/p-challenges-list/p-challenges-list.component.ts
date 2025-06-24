@@ -9,6 +9,7 @@ import { UserChallengeEntity } from '../../../../core/entity/user-challenge.enti
 import { StorageService } from '../../../../core/services/storage.service';
 import { ChallengeCategoryService } from '../../../../core/services/challenge-category.service';
 import { ActiveChallengeService } from '../../../../core/services/active-challenge.service';
+import { ApiConfigService } from '../../../../core/services/api-config.service';
 
 @Component({
   selector: 'app-p-challenges-list',
@@ -33,7 +34,8 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private route: ActivatedRoute,
     private challengeCategoryService: ChallengeCategoryService,
-    private activeChallengeService: ActiveChallengeService
+    private activeChallengeService: ActiveChallengeService,
+    private apiConfig: ApiConfigService
   ) { }
 
   ngOnInit() {
@@ -75,7 +77,7 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
           if (user.smoker_type) {
             this.challengeCategoryService.getChallengeCategories().subscribe(categories => {
               const category = categories.find(cat => cat.name === categoryName);
-              console.log("oui",category);
+              console.log("oui", category);
               if (category) {
                 this.challengeService.getChallengeByCategory(category.id).subscribe(categoryChallenges => {
                   console.log('📋 Challenges par catégorie:', categoryChallenges);
@@ -98,6 +100,12 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  getBadgeImage(badge_url: string): string {
+    console.log("badge_url", this.apiConfig.buildImageUrl(badge_url));
+    return this.apiConfig.buildImageUrl(badge_url);
+
   }
 
   private checkActiveChallenges() {

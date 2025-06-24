@@ -23,6 +23,8 @@
   gap: 20px;
 }
 
+
+
 .grid-item {
   position: relative;
   background-color: $background-color;
@@ -32,6 +34,7 @@
   align-items: center;
   opacity: 0;
   animation: popIn 0.5s ease forwards;
+  overflow: hidden;
   
   &:nth-child(1) { animation-delay: 0.1s; }
   &:nth-child(2) { animation-delay: 0.3s; }
@@ -45,6 +48,8 @@
   &:hover {
     transform: translateY(-5px);
   }
+
+   
   
   .go-button {
     position: absolute;
@@ -64,6 +69,36 @@
       color: white;
     }
   }
+  svg{
+    position: absolute;
+    top: -20px;
+    left: 65px;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+ 
+  
+  
+}
+
+.grid-item:nth-child(1),
+.grid-item:nth-child(4),
+.grid-item:nth-child(5),
+.grid-item:nth-child(8) {
+  background-color: $background-color;
+  svg{
+    path{
+      fill: #8975ee;
+    }
+  }
+}
+
+.grid-item:nth-child(2),
+.grid-item:nth-child(3),
+.grid-item:nth-child(6),
+.grid-item:nth-child(7) {
+  background-color: $primary-color;
 }
 
 @keyframes slideUp {

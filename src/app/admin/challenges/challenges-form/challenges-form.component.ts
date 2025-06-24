@@ -19,7 +19,10 @@ export class ChallengesFormComponent implements OnInit {
   isEditMode = false;
   challengeId: number | null = null;
   categories: ChallengeCategoryEntity[] = [];
-
+  imageError: string | null = null;
+  selectedFile: File | null = null;
+  previewUrl: string | null = null;
+  isUploading = false;
   constructor(
     private fb: FormBuilder,
     private challengeService: ChallengeService,
@@ -32,11 +35,9 @@ export class ChallengesFormComponent implements OnInit {
       description: ['', Validators.required],
       target: ['', Validators.required],
       points: ['', [Validators.required, Validators.min(0)]],
-      badges: ['', Validators.required],
       is_active: [false],
       estimated_duration: ['', [Validators.required, Validators.min(0)]],
-      category_id: ['', Validators.required],
-      image_url: ['', Validators.required]
+      category_id: ['', Validators.required]
     });
   }
 
@@ -70,38 +71,66 @@ export class ChallengesFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      // Validation du type de fichier
+      if (!file.type.match(/image\/(jpeg|png|gif|jpg)/)) {
+        this.imageError = 'Seuls les fichiers images (JPEG, PNG, GIF) sont acceptés';
+        return;
+      }
+
+      // Validation de la taille (5MB max)
+      if (file.size > 5 * 1024 * 1024) {
+        this.imageError = 'L\'image ne doit pas dépasser 5MB';
+        return;
+      }
+
+      this.selectedFile = file;
+      this.imageError = null;
+
+      // Mettre à jour le champ badge_url du formulaire
+      this.challengeForm.patchValue({ badge_url: file.name });
+
+      // Création de l'URL de prévisualisation
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  async onSubmit() {
     if (this.challengeForm.valid) {
-      const formData = this.challengeForm.value;
+      this.isUploading = true;
+      const challenge: ChallengeEntity = {
+        ...this.challengeForm.value,
+        category_id: parseInt(this.challengeForm.value.category_id)
+      };
 
-
-      if (this.isEditMode && this.challengeId) {
-        const challengeToUpdate: ChallengeEntity = {
-          ...formData,
-          id: this.challengeId
-        };
-        console.log('Données de mise à jour:', challengeToUpdate);
-
-        this.challengeService.updateChallenge(challengeToUpdate).subscribe({
-          next: () => {
-            console.log('Challenge mis à jour avec succès');
-            this.router.navigate(['/admin/challenges']);
-          },
-          error: (error) => {
-            console.error('Erreur lors de la mise à jour:', error);
+      try {
+        if (this.isEditMode && this.challengeId) {
+          // Si on a une nouvelle image, on l'upload d'abord
+          if (this.selectedFile) {
+            await this.challengeService.uploadImage(this.challengeId, this.selectedFile).toPromise();
           }
-        });
-      } else {
-        console.log('Données de création:', formData);
-        this.challengeService.createChallenge(formData).subscribe({
-          next: () => {
-            console.log('Challenge créé avec succès');
-            this.router.navigate(['/admin/challenges']);
-          },
-          error: (error) => {
-            console.error('Erreur lors de la création:', error);
+          challenge.id = this.challengeId;
+          await this.challengeService.updateChallenge(challenge).toPromise();
+        } else {
+          // Création d'une nouvelle récompense
+          const newChallenge = await this.challengeService.createChallenge(challenge).toPromise();
+          // Upload de l'image si elle existe
+          if (this.selectedFile && newChallenge?.id) {
+            await this.challengeService.uploadImage(newChallenge.id, this.selectedFile).toPromise();
           }
-        });
+        }
+        this.router.navigate(['/admin/challenges']);
+      } catch (error) {
+        console.error('Erreur:', error);
+        this.imageError = 'Une erreur est survenue lors de l\'envoi';
+      } finally {
+        this.isUploading = false;
       }
     }
   }

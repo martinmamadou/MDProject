@@ -13,7 +13,9 @@
 <div class="list-challenges-grid">
   <ng-container *ngIf="challenges.length > 0">
     <div class="grid-wrapper" *ngFor="let challenge of challenges" (click)="openChallengeModal(challenge)">
-      <div class="challenge-item"></div>
+      <div class="challenge-item">
+        <img [src]="getBadgeImage(challenge.badge_url)" alt="{{challenge.name}}" width="100" height="100">
+      </div>
       <h3>{{challenge.name}}</h3>
       <p>{{challenge.description}}</p>
     </div>
