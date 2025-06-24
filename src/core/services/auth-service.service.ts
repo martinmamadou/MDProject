@@ -4,6 +4,7 @@ import { UserEntity } from '../entity/user.entity';
 import { map, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiConfigService } from './api-config.service';
+import { UserServiceService } from './user-service.service';
 
 interface LoginResponse {
   access_token: string;
@@ -18,7 +19,8 @@ export class AuthServiceService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private apiConfig: ApiConfigService
+    private apiConfig: ApiConfigService,
+    private userService: UserServiceService
   ) { }
 
   public Register(user: UserEntity): Observable<LoginResponse> {
@@ -37,7 +39,30 @@ export class AuthServiceService {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user', JSON.stringify(response.user));
         console.log('🔐 Login réussi:', response.user);
-        this.router.navigate(['/'])
+
+        // Vérifier si c'est une nouvelle date pour rediriger vers /emotion
+        this.emotion().subscribe((isNewDate) => {
+          if (isNewDate) {
+            console.log('🔄 Nouvelle date détectée, redirection vers /emotion');
+            this.router.navigate(['/emotion']);
+          } else {
+            console.log('📅 Même date, redirection vers /');
+            this.router.navigate(['/']);
+          }
+        });
+      })
+    );
+  }
+
+  public emotion(): Observable<boolean> {
+    return this.userService.getUserConnected().pipe(
+      map(user => {
+        const today = new Date().toISOString();
+        const lastLoginDate = user.login_date ? new Date(user.login_date).toISOString() : null;
+
+        const areDatesDifferent = lastLoginDate !== today;
+        console.log('📅 Dates différentes (secondes):', areDatesDifferent, { today, lastLoginDate });
+        return areDatesDifferent;
       })
     );
   }
