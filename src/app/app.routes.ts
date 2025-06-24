@@ -32,6 +32,7 @@ import { CompteComponent } from './public/profile/compte/compte.component';
 import { PUrgencesComponent } from './public/p-urgences/p-urgences.component';
 import { PUrgencesCategoryComponent } from './public/p-urgences/p-urgences-category/p-urgences-category.component';
 import { PUrgencesListComponent } from './public/p-urgences/p-urgences-list/p-urgences-list.component';
+import { EmotionComponent } from './auth/emotion/emotion.component';
 
 
 export const routes: Routes = [
@@ -101,6 +102,9 @@ export const routes: Routes = [
     },
     {
       path :'smoker-profile', component: SmokerProfileComponent
+    },
+    {
+      path :'emotion', component: EmotionComponent
     }
     
     

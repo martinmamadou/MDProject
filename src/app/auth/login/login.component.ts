@@ -19,6 +19,9 @@ export class LoginComponent {
   }
 
   public Login() {
+    this.authService.emotion().subscribe((isNewDay) => {
+      console.log('isNewDay', isNewDay);
+    });
     this.authService.Login(this.loginForm.value).subscribe({
       next: (res) => {
         console.log('User logged in successfully', res);
