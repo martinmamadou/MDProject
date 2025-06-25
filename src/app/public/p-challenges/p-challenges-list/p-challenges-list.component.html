@@ -3,12 +3,7 @@
   <p>encore un jour sans cigarette</p>
 </div>
 
-<div class="current-challenge" *ngIf="activeChallenge">
-  <div class="progress-fill" [style.width.%]="(duration / activeChallenge.estimated_duration) * 100"></div>
-  <h2>
-    {{activeChallenge.name}}
-  </h2>
-</div>
+
 
 <div class="list-challenges-grid">
   <ng-container *ngIf="challenges.length > 0">
@@ -28,22 +23,3 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" *ngIf="showModal" (click)="closeModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <div class="modal-header">
-      <h2>{{selectedChallenge?.name}}</h2>
-      <button class="close-button" (click)="closeModal()">&times;</button>
-    </div>
-    <div class="modal-body">
-      <p class="description">{{selectedChallenge?.description}}</p>
-      <div class="challenge-details">
-        <p><strong>Type de fumeur ciblé:</strong> {{selectedChallenge?.target}}</p>
-        <p><strong>Temps estimé:</strong> {{selectedChallenge?.estimated_duration}} m </p>
-        <p><strong>Points:</strong> {{selectedChallenge?.points}}</p>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-primary" (click)="acceptChallenge()">Accepter le défi</button>
-      </div>
-    </div>
-  </div>
-</div>

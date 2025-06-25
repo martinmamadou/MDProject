@@ -154,80 +154,11 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
     });
   }
 
-  openChallengeModal(challenge: ChallengeEntity) {
-    this.selectedChallenge = challenge;
-    this.showModal = true;
-  }
 
-  closeModal() {
-    this.showModal = false;
-    this.selectedChallenge = null;
-  }
-
-  acceptChallenge() {
-    if (this.selectedChallenge && this.user) {
-      this.challengeService.acceptChallenge(this.selectedChallenge.id, this.user.id).subscribe({
-        next: () => {
-          this.closeModal();
-          this.activeChallengeService.setActiveChallenge(this.selectedChallenge!);
-          this.loadUserAndChallenges();
-        },
-        error: (error) => {
-          console.error('Erreur lors de l\'acceptation du défi:', error);
-        }
-      });
-    }
-  }
 
   displayChallenge(challenge: ChallengeEntity) {
     this.selectedChallenge = challenge;
-    this.showModal = true;
   }
 
-  finishChallenge() {
-    if (this.activeChallenge && this.user) {
-      const pointsToAdd = this.activeChallenge.points;
-      console.log('🏁 Finishing challenge:', this.activeChallenge);
-      this.challengeService.getUserChallengeByUserAndChallenge(this.user.id, this.activeChallenge.id).subscribe({
-        next: (userChallenge) => {
-          if (userChallenge) {
-            this.challengeService.completeUserChallenge(userChallenge.id, pointsToAdd).subscribe({
-              next: () => {
-                this.activeChallengeService.clearActiveChallenge();
-                this.loadUserAndChallenges();
-                this.updateUserPoints(pointsToAdd);
-              },
-              error: (error) => {
-                console.error('Erreur lors de la mise à jour du user-challenge:', error);
-              }
-            });
-          }
-        },
-        error: (error) => {
-          console.error('Erreur lors de la récupération du user-challenge:', error);
-        }
-      });
-    }
-  }
 
-  updateUserPoints(points: number) {
-    if (this.user) {
-      this.userService.getUserConnected().subscribe({
-        next: (currentUser) => {
-          const newPoints = currentUser.points + points;
-          this.userService.updateUserPoints(this.user.id, newPoints).subscribe({
-            next: () => {
-              this.loadUserAndChallenges();
-            },
-            error: (error) => {
-              console.error('Erreur lors de la mise à jour des points:', error);
-            }
-          });
-        },
-        error: (error) => {
-          console.error('Erreur lors de la récupération des points actuels:', error);
-        }
-      });
-    }
-  }
 }

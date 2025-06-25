@@ -22,4 +22,18 @@
   </p>
 </div>
 
-<button class="btn btn-primary" (click)="acceptChallenge()">Accepter le défi</button>
+
+
+<ng-container *ngIf="!activeChallenge && !isChallengeCompleted">
+  <button class="btn btn-primary" (click)="acceptChallenge()">Accepter le défi</button>
+</ng-container>
+
+<ng-container *ngIf="activeChallenge && !isChallengeCompleted">
+  <button class="btn btn-primary hidden" (click)="acceptChallenge()">Accepter le défi</button>
+</ng-container>
+
+<ng-container *ngIf="isChallengeCompleted">
+  <div class="completed-message">
+    <button class="btn btn-primary" disabled>Défi déjà complété !</button>
+  </div>
+</ng-container>

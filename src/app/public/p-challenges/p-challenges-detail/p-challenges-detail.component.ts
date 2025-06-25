@@ -6,10 +6,11 @@ import { UserServiceService } from '../../../../core/services/user-service.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiConfigService } from '../../../../core/services/api-config.service';
 import { ActiveChallengeService } from '../../../../core/services/active-challenge.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-p-challenges-detail',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './p-challenges-detail.component.html',
   styleUrl: './p-challenges-detail.component.scss'
 })
@@ -17,7 +18,8 @@ export class PChallengesDetailComponent {
 
   user!: UserEntity;
   challenge!: ChallengeEntity;
-  activeChallenge!: ChallengeEntity;
+  activeChallenge: ChallengeEntity | null = null;
+  isChallengeCompleted: boolean = false;
 
   constructor(
     private challengeService: ChallengeService,
@@ -31,7 +33,15 @@ export class PChallengesDetailComponent {
   ngOnInit(): void {
     this.userService.getUserConnected().subscribe(user => {
       this.user = user;
+      if (this.challenge) {
+        this.checkChallengeCompletion();
+      }
     });
+
+    this.activeChallengeService.getActiveChallenge().subscribe(activeChallenge => {
+      this.activeChallenge = activeChallenge;
+    });
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.challengeService.getChallengeById(+id).subscribe(challenge => {
@@ -39,6 +49,23 @@ export class PChallengesDetailComponent {
           ...challenge,
           badge_url: challenge.badge_url ? this.apiConfig.buildImageUrl(challenge.badge_url) : ''
         };
+        if (this.user) {
+          this.checkChallengeCompletion();
+        }
+      });
+    }
+  }
+
+  checkChallengeCompletion() {
+    if (this.user && this.challenge) {
+      this.challengeService.getUserChallengeByUserAndChallenge(this.user.id, this.challenge.id).subscribe({
+        next: (userChallenge) => {
+          this.isChallengeCompleted = userChallenge ? userChallenge.is_completed : false;
+        },
+        error: (error) => {
+          console.error('Erreur lors de la vérification de l\'état du défi:', error);
+          this.isChallengeCompleted = false;
+        }
       });
     }
   }
