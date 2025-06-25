@@ -12,7 +12,7 @@ import { ChallengeService } from '../core/services/challenge.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgFor, CommonModule, RouterOutlet, NavigationComponent, ActiveChallengeComponent],
+  imports: [NgFor, CommonModule, RouterOutlet, NavigationComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent {

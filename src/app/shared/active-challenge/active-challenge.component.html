@@ -1,7 +1,11 @@
 
 <div class="active-challenge" *ngIf="activeChallenge">
+
   <div class="challenge-info">
-    <h3>{{ activeChallenge.name }}</h3>
+    <div class="challenge-name">
+      <h3>Défi en cours</h3>
+      <h3>{{ activeChallenge.name }}</h3>
+    </div>
     <p>Temps restant: {{ remainingTime }} secondes</p>
   </div>
   <div class="progress-bar">
