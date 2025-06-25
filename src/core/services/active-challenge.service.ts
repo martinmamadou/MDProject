@@ -26,6 +26,13 @@ export class ActiveChallengeService {
       this.startTime = Number(savedStartTime);
       const elapsedTime = Math.floor((Date.now() - this.startTime) / 1000);
 
+      // Vérifier si le défi est expiré
+      if (elapsedTime >= challenge.estimated_duration) {
+        // Le défi est expiré, le nettoyer
+        this.clearActiveChallenge();
+        return;
+      }
+
       this.activeChallengeSubject.next(challenge);
       this.durationSubject.next(elapsedTime);
       this.startTimer();
