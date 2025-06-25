@@ -4,8 +4,9 @@
 </div>
 
 <div class="defis-category-grid">
-  <div class="grid-item"  *ngFor="let urgence of urgences" (click)="goToUrgencesList(urgence.name)">
-    <p>{{urgence.name}}</p>
+  <div class="grid-item"  *ngFor="let urgence of urgences; let i = index" (click)="goToUrgencesList(urgence.name)">
+    <div [innerHTML]="getSvgForCategory(i)"></div>
+    <p class="name">{{urgence.name}}</p>
   </div>
 </div>
 
