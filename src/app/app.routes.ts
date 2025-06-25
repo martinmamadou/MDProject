@@ -33,6 +33,7 @@ import { PUrgencesComponent } from './public/p-urgences/p-urgences.component';
 import { PUrgencesCategoryComponent } from './public/p-urgences/p-urgences-category/p-urgences-category.component';
 import { PUrgencesListComponent } from './public/p-urgences/p-urgences-list/p-urgences-list.component';
 import { EmotionComponent } from './auth/emotion/emotion.component';
+import { PChallengesDetailComponent } from './public/p-challenges/p-challenges-detail/p-challenges-detail.component';
 
 
 export const routes: Routes = [
@@ -83,6 +84,7 @@ export const routes: Routes = [
     {
       path :'challenges', component: PChallengesComponent, canActivate: [authGuard], children: [
         {path: 'list/:category', component: PChallengesListComponent},
+        {path: 'details/:id', component: PChallengesDetailComponent},
         {path: '', component: PChallengesCategoryComponent}
       ]
     },

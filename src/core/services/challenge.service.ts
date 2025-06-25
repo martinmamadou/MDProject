@@ -50,7 +50,7 @@ export class ChallengeService {
   }
 
   acceptChallenge(userId: number, challengeId: number): Observable<any> {
-    return this.http.post(`${this.apiConfig.buildApiUrl('/user-challenges')}/accept`, { userId, challengeId });
+    return this.http.post(`${this.apiConfig.buildApiUrl('/user-challenges')}/accept`, { challengeId, userId });
   }
 
   completeChallenge(userId: number, challengeId: number): Observable<any> {

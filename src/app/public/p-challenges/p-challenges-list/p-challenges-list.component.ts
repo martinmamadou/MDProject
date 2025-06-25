@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ChallengeEntity } from '../../../../core/entity/challenge.entity';
 import { UserEntity } from '../../../../core/entity/user.entity';
 import { ChallengeService } from '../../../../core/services/challenge.service';
@@ -35,7 +35,8 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private challengeCategoryService: ChallengeCategoryService,
     private activeChallengeService: ActiveChallengeService,
-    private apiConfig: ApiConfigService
+    private apiConfig: ApiConfigService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -105,7 +106,10 @@ export class PChallengesListComponent implements OnInit, OnDestroy {
   getBadgeImage(badge_url: string): string {
     console.log("badge_url", this.apiConfig.buildImageUrl(badge_url));
     return this.apiConfig.buildImageUrl(badge_url);
+  }
 
+  navigateToChallengeDetails(challengeId: number) {
+    this.router.navigate(['/challenges/details', challengeId]);
   }
 
   private checkActiveChallenges() {

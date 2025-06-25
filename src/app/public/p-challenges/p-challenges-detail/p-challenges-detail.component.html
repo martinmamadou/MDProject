@@ -1,0 +1,25 @@
+<div class="title-section">
+  <h1>Défis choisi</h1>
+  <p>encore un jour sans cigarette</p>
+</div>
+
+<div class="info-container">
+  <div class="info-item">
+    <img [src]="challenge.badge_url" alt="{{challenge.name}}" width="100" height="100">
+  </div>
+  <div class="text-container">
+    <h2>{{challenge.name}}</h2>
+    <p>{{challenge.estimated_duration}} {{challenge.points}} points</p>
+  </div>
+</div>
+
+<div class="description-container">
+  <h2>
+    Description du défi
+  </h2>
+  <p>
+    {{challenge.description}}
+  </p>
+</div>
+
+<button class="btn btn-primary" (click)="acceptChallenge()">Accepter le défi</button>
