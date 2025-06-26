@@ -4,12 +4,12 @@ import { UserServiceService } from '../../../../core/services/user-service.servi
 import { CommonModule } from '@angular/common';
 import { EmergencyCategoryService } from '../../../../core/services/emergency-category.service';
 import { EmergencyService } from '../../../../core/services/emergency.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-p-urgences-category',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './p-urgences-category.component.html',
   styleUrl: './p-urgences-category.component.scss'
 })

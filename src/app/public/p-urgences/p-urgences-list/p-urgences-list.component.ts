@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmergencyService } from '../../../../core/services/emergency.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserServiceService } from '../../../../core/services/user-service.service';
 import { UserEntity } from '../../../../core/entity/user.entity';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ interface Urgency {
 
 @Component({
   selector: 'app-p-urgences-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './p-urgences-list.component.html',
   styleUrl: './p-urgences-list.component.scss'
 })

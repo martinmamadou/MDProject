@@ -8,8 +8,9 @@
     border-radius: 10px;
     background-color: $secondary-color;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    
   }
 
   
@@ -25,6 +26,12 @@ button {
   width: 90%;
   background-color: white;
   border: 2px solid $secondary-color;
+}
+
+.back-button{
+  svg{
+    text-align: left;
+  }
 }
 
 .hidden{

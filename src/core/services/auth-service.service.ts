@@ -39,17 +39,18 @@ export class AuthServiceService {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user', JSON.stringify(response.user));
         console.log('🔐 Login réussi:', response.user);
+        this.router.navigate(['/']);
 
         // Vérifier si c'est une nouvelle date pour rediriger vers /emotion
-        this.emotion().subscribe((isNewDate) => {
-          if (isNewDate) {
-            console.log('🔄 Nouvelle date détectée, redirection vers /emotion');
-            this.router.navigate(['/emotion']);
-          } else {
-            console.log('📅 Même date, redirection vers /');
-            this.router.navigate(['/']);
-          }
-        });
+        // this.emotion().subscribe((isNewDate) => {
+        //   if (isNewDate) {
+        //     console.log('🔄 Nouvelle date détectée, redirection vers /emotion');
+        //     this.router.navigate(['/emotion']);
+        //   } else {
+        //     console.log('📅 Même date, redirection vers /');
+        //     this.router.navigate(['/']);
+        //   }
+        // });
       })
     );
   }

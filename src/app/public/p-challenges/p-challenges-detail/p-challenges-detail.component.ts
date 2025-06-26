@@ -3,14 +3,14 @@ import { ChallengeService } from '../../../../core/services/challenge.service';
 import { UserEntity } from '../../../../core/entity/user.entity';
 import { ChallengeEntity } from '../../../../core/entity/challenge.entity';
 import { UserServiceService } from '../../../../core/services/user-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiConfigService } from '../../../../core/services/api-config.service';
 import { ActiveChallengeService } from '../../../../core/services/active-challenge.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-p-challenges-detail',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './p-challenges-detail.component.html',
   styleUrl: './p-challenges-detail.component.scss'
 })
@@ -119,6 +119,10 @@ export class PChallengesDetailComponent {
         }
       });
     }
+  }
+
+  goToChallengeList(categoryName: string) {
+    this.router.navigate(['/challenges/list/', categoryName]);
   }
 }
 

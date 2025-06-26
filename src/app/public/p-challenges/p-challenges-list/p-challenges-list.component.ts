@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ChallengeEntity } from '../../../../core/entity/challenge.entity';
 import { UserEntity } from '../../../../core/entity/user.entity';
 import { ChallengeService } from '../../../../core/services/challenge.service';
@@ -13,7 +13,7 @@ import { ApiConfigService } from '../../../../core/services/api-config.service';
 
 @Component({
   selector: 'app-p-challenges-list',
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, RouterLink],
   templateUrl: './p-challenges-list.component.html',
   styleUrl: './p-challenges-list.component.scss'
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserEntity } from '../../../../core/entity/user.entity';
 import { UserServiceService } from '../../../../core/services/user-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RewardsService } from '../../../../core/services/rewards.service';
 import { RewardEntity } from '../../../../core/entity/reward.entity';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { ApiConfigService } from '../../../../core/services/api-config.service';
 @Component({
   selector: 'app-p-rewards-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './p-rewards-list.component.html',
   styleUrl: './p-rewards-list.component.scss'
 })

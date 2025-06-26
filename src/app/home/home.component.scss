@@ -175,7 +175,7 @@
   img {
     width: 150px;
     height: 100px;
-    background: linear-gradient(135deg, #9575cd 0%, #7e57c2 100%);
+    background: $secondary-color;
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);

@@ -1,9 +1,12 @@
 @import '../../../../styles.scss';
 
 img{
-  width: 100%;
+  min-width: 100%;
+  min-height: 160px;
+  background: $secondary-color;
   object-fit: cover;
   border-radius: 20px;
+  margin-bottom: 20px;
 }
 
 .rewards-name {
@@ -39,9 +42,14 @@ img{
 
 .button-container {
   margin-top: 2rem;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   margin: 2rem auto;
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 .btn {

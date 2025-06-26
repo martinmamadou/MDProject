@@ -10,8 +10,9 @@
   animation-delay: 0.9s;
   
   img{
-    height: 160px;
-    width: 100%;
+    background: $secondary-color;
+    min-height: 160px;
+    min-width: 100%;
     border-radius: 20px;
   }
 }
@@ -62,9 +63,10 @@
   }
 
   img {
-    width: 170px;
-    height: 120px;
+    min-width: 170px;
+    min-height: 120px;
     cursor: pointer;
+    background: $secondary-color;
     border-radius: 20px;
     object-fit: cover;
     transition: transform 0.2s;

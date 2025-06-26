@@ -34,7 +34,7 @@
         <p>Défi du jour</p>
         <p>{{challenge.name}}</p>   
       </div>
-      <button class="go-button"> Go </button>
+      <button class="go-button" (click)="goToChallenge()"> Go </button>
     </div>
     <div class="div2 grid-item">
       <svg class="character" width="53" height="45" viewBox="0 0 53 45" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -51,7 +51,7 @@
         <path d="M94.6244 7.79333C94.6244 7.79333 77.4183 -3.60282 56.46 2.40887C35.4991 8.41868 21.1917 27.2057 9.19691 42.117C-2.79973 57.0307 -2.27589 75.3918 9.94502 86.7701C22.1659 98.1484 34.476 88.9842 54.3584 93.3755C74.2409 97.7667 78.8813 101.924 97.9126 94.876C116.944 87.8277 126.146 62.2136 117.837 39.4709C109.525 16.7262 94.6244 7.79333 94.6244 7.79333Z" fill="#8B00B9"/>
         </svg>  
       <p>Plan d'urgence</p>
-      <button class="go-button"> Go </button>
+      <button class="go-button" routerLink="/urgences" routerLinkActive="router-link-active" > Go </button>
     </div>
     <div class="div3 grid-item">
       <svg class="svg1" width="98" height="95" viewBox="0 0 98 95" fill="none" xmlns="http://www.w3.org/2000/svg">

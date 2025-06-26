@@ -8,7 +8,7 @@ import { StatsService } from '../../core/services/stats.service';
 import { RewardEntity } from '../../core/entity/reward.entity';
 import { RewardsService } from '../../core/services/rewards.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiConfigService } from '../../core/services/api-config.service';
 
 /**
@@ -17,7 +17,7 @@ import { ApiConfigService } from '../../core/services/api-config.service';
  */
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -123,6 +123,10 @@ export class HomeComponent {
    */
   goToReward(reward: RewardEntity) {
     this.router.navigate(['/rewards/details', reward.id]);
+  }
+
+  goToChallenge() {
+    this.router.navigate(['/challenges/details', this.challenge.id]);
   }
 }
 
